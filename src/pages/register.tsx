@@ -1,10 +1,11 @@
 
-const register = () => {
+
+const Register = () => {
   return (
      <div>
-         <h1>This is register component</h1>
+         <h1>This is Register component</h1>
      </div>
   )
 };
 
-export default register;
+export default Register;

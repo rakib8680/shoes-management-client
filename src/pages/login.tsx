@@ -1,21 +1,26 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
 import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 
+
+
+
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = async (loginInfo) => {
+  const onSubmit = async (loginInfo ) => {
     
   const  res = await login(loginInfo).unwrap()
   const user = verifyToken(res.accessToken) as TUser
   dispatch(setUser({user:user, token:res.accessToken}))
+  navigate('/allProducts')
   console.log(res);
 
   };

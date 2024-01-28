@@ -4,32 +4,35 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import ALLProducts from "../pages/ALLProducts";
 import SalesHistory from "../pages/SalesHistory";
-
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element:<App/>,
-        children:[
-            {
-                path:'allProducts',
-                element:<ALLProducts/>
-            },
-            {
-                path:'salesHistory',
-                element:<SalesHistory/>
-            }
-        ]
-    },
-    {
-        path: "/login",
-        element:<Login/>
-    },
-    {
-        path: "/register",
-        element:<Register/>
-    }
-])
-
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "allProducts",
+        element: <ALLProducts />,
+      },
+      {
+        path: "salesHistory",
+        element: <SalesHistory />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+]);
 
 export default router;

@@ -1,26 +1,42 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
+import { useLoginMutation } from "../redux/features/auth/authApi";
 
 const Login = () => {
+  const { register, handleSubmit } = useForm();
+  const [login] = useLoginMutation();
+
+  const onSubmit = async (loginInfo) => {
+    
+  const  res = await login(loginInfo).unwrap()
+  console.log(res);
+
+  };
+
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-gray-400 ">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-gray-600 to-white ">
       <div className="bg-gradient-to-br from-white to-blue-gray-300 p-8 rounded-lg shadow-md w-96">
         <h2 className="text-4xl font-extrabold mb-6 text-gray-800 text-center">
           Please Login !
         </h2>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-7 mb-10 mt-10">
             <div className="w-full">
-              <Input crossOrigin={""} label="Email" />
+              <Input crossOrigin={""} {...register("email")} label="Email" />
             </div>
             <div className="w-full">
-              <Input crossOrigin={""} label="Password" />
+              <Input
+                crossOrigin={""}
+                {...register("password")}
+                label="Password"
+              />
             </div>
           </div>
+          <Button type="submit" placeholder={""} className="mt-6" fullWidth>
+            sign in
+          </Button>
         </form>
-        <Button placeholder={""} className="mt-6" fullWidth>
-          sign up
-        </Button>
         <Typography
           placeholder={""}
           color="gray"

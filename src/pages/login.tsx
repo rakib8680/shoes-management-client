@@ -23,7 +23,7 @@ const Login = () => {
       toast.success("Login successful", { id: toastId, duration: 2000 });
       navigate("/allProducts");
     } catch (error) {
-      toast.error("Login failed", { id: toastId, duration: 2000 });
+      toast.error("Invalid Email or Password", { id: toastId, duration: 2000 });
     }
   };
 

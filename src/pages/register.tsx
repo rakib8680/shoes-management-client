@@ -1,18 +1,25 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../redux/hook";
-import { TUser, setUser } from "../redux/features/auth/authSlice";
-import { verifyToken } from "../utils/verifyToken";
 import { toast } from "sonner";
+import { useRegisterMutation } from "../redux/features/auth/authApi";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
-  const dispatch = useAppDispatch();
+  const [registerUser] = useRegisterMutation();
   const navigate = useNavigate();
 
-  const onSubmit = async (loginInfo: FieldValues) => {
-   console.log(loginInfo);
+  const onSubmit = async (registerInfo: FieldValues) => {
+    const toastId = toast.loading("Loading...");
+
+    try {
+      await registerUser(registerInfo);
+      toast.success("Registration successful", { id: toastId, duration: 2000 });
+      navigate("/login");
+      toast.info("Please Login Now", { duration: 3000 });
+    } catch (error) {
+      toast.error("Registration failed", { id: toastId, duration: 2000 });
+    }
   };
 
   return (

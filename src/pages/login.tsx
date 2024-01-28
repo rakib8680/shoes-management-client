@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
-import { setUser } from "../redux/features/auth/authSlice";
+import { TUser, setUser } from "../redux/features/auth/authSlice";
+import { verifyToken } from "../utils/verifyToken";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -13,7 +14,8 @@ const Login = () => {
   const onSubmit = async (loginInfo) => {
     
   const  res = await login(loginInfo).unwrap()
-  dispatch(setUser({user:{}, token:res.accessToken}))
+  const user = verifyToken(res.accessToken) as TUser
+  dispatch(setUser({user:user, token:res.accessToken}))
   console.log(res);
 
   };

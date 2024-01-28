@@ -1,6 +1,7 @@
+import AddShoeModal from "../components/ui/AddShoeModal";
 import AllProductsRow from "../components/ui/AllProductsRow";
 import { useGetAllProductsQuery } from "../redux/features/products/productsApi";
-import { Button, Card, Typography } from "@material-tailwind/react";
+import {Card, Typography } from "@material-tailwind/react";
 
 const TABLE_HEAD = [
   "Image",
@@ -35,14 +36,12 @@ const ALLProducts = () => {
 
   return (
     <div className="container mx-auto ">
-      
+
       <h1 className="text-center py-10 text-2xl text-blue-gray-500 font-extrabold">
         Total Products: {products?.length}
       </h1>
 
-
-      <Button placeholder={''}>Add Shoes</Button>
-
+    <AddShoeModal/>
 
       <Card
         placeholder={""}

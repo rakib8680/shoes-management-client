@@ -1,13 +1,11 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
 import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
-
-
-
+import { toast } from "sonner";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -15,14 +13,18 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = async (loginInfo ) => {
-    
-  const  res = await login(loginInfo).unwrap()
-  const user = verifyToken(res.accessToken) as TUser
-  dispatch(setUser({user:user, token:res.accessToken}))
-  navigate('/allProducts')
-  console.log(res);
+  const onSubmit = async (loginInfo: FieldValues) => {
+    const toastId = toast.loading("Loading...");
 
+    try {
+      const res = await login(loginInfo).unwrap();
+      const user = verifyToken(res.accessToken) as TUser;
+      dispatch(setUser({ user: user, token: res.accessToken }));
+      toast.success("Login successful", { id: toastId, duration: 2000 });
+      navigate("/allProducts");
+    } catch (error) {
+      toast.error("Login failed", { id: toastId, duration: 2000 });
+    }
   };
 
   return (

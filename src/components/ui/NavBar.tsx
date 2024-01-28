@@ -1,14 +1,27 @@
 import React from "react";
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hook";
+import { logOut } from "../../redux/features/auth/authSlice";
+import { toast } from "sonner";
+
+
 
 const NavBar = () => {
+
+  const dispatch = useAppDispatch();
+
+  const handleLogOut= ()=>{
+    dispatch(logOut())
+    toast.error('LogOut successful', {duration:2000} )
+  }
+
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -95,31 +108,53 @@ const NavBar = () => {
               )}
             </IconButton>
           </div>
+          <Button
+            onClick={handleLogOut}
+            placeholder={""}
+            variant="filled"
+            size="sm"
+            className="hidden lg:inline-block bg-pink-900 rounded-md"
+          >
+            LogOut
+          </Button>
         </div>
 
         {/* for mobile  */}
-        <MobileNav open={openNav}>
-          <div className="flex items-center gap-x-1">
+        <Collapse open={openNav}>
+          <div className="flex flex-col items-center gap-3 my-5">
+            <NavLink to="/allProducts">
+              <Button
+                placeholder={""}
+                fullWidth
+                variant="gradient"
+                size="sm"
+                className=""
+              >
+                All Products
+              </Button>
+            </NavLink>
+            <NavLink to="salesHistory">
+              <Button
+                placeholder={""}
+                fullWidth
+                variant="outlined"
+                size="sm"
+                className=""
+              >
+                Sales History
+              </Button>
+            </NavLink>
             <Button
+            onClick={handleLogOut}
               placeholder={""}
-              fullWidth
-              variant="text"
+              variant="filled"
               size="sm"
-              className=""
+              className=" bg-pink-900 rounded-md mt-7 text-[10px] px-3 py-1"
             >
-              <span>Log In</span>
-            </Button>
-            <Button
-              placeholder={""}
-              fullWidth
-              variant="gradient"
-              size="sm"
-              className=""
-            >
-              <span>Sign in</span>
+              LogOut
             </Button>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );

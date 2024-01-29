@@ -10,23 +10,44 @@ import {
 } from "@material-tailwind/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import ShoeSizesSelect from "./ShoeSizesSelect";
-import { useAddProductMutation } from "../../redux/features/products/productsApi";
+import { FaPenRuler } from "react-icons/fa6";
+import { TProduct } from "../../pages/ALLProducts";
+import { useUpdateProductMutation } from "../../redux/features/products/productsApi";
 import { toast } from "sonner";
 
-const AddShoeModal = () => {
+const UpdateShoeModal = ({ product }: { product: TProduct }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
   const { register, handleSubmit, control } = useForm();
-  const [addProduct] = useAddProductMutation();
+  const [updateProduct] = useUpdateProductMutation();
 
+  const {
+    name,
+    price,
+    brand,
+    color,
+    model,
+    quantity,
+    style,
+    size,
+    _id,
+    photoUrl,
+  } = product || {};
 
+  const onSubmit = async (newData: FieldValues) => {
+    const toastId = toast.loading("Updating...");
+    const payload = {
+      id: _id,
+      updateInfo: newData,
+    };
 
-  const onSubmit = async (data: FieldValues) => {
-    const toastId = toast.loading("Adding...");
     try {
-      await addProduct(data);
-      toast.success("Shoe added successfully", { id: toastId, duration: 2000 });
-    } catch (err) {
+      await updateProduct(payload);
+      toast.success("Shoe updated successfully", {
+        id: toastId,
+        duration: 2000,
+      });
+    } catch (error) {
       toast.error("Something went wrong", { id: toastId, duration: 2000 });
     }
   };
@@ -34,37 +55,22 @@ const AddShoeModal = () => {
   return (
     <>
       <Button
-        variant="gradient"
-        onClick={handleOpen}
-        color="blue-gray"
-        className="flex items-center gap-3 mb-3  ms-7 md:ms-0 px-3 py-2 md:px-6 md:py-3"
         placeholder={""}
+        onClick={handleOpen}
+        className="p-2 rounded-md bg-green-200"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className="h-5 w-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-          />
-        </svg>
-        Add Shoes
+        <FaPenRuler size={18} color="green" />
       </Button>
 
       <Dialog placeholder={""} open={open} handler={handleOpen} className="p-5">
         <DialogHeader placeholder={""}>Add a new pair of shoes !</DialogHeader>
         <DialogBody placeholder={""}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-7 mb-10 ">
+            <div className="space-y-7 mb-10 md:mt-10">
               {/* name  */}
               <Input
                 className="w-full"
+                defaultValue={name}
                 crossOrigin={""}
                 {...register("name", { required: true })}
                 label="Name"
@@ -73,6 +79,7 @@ const AddShoeModal = () => {
               {/* price  */}
               <Input
                 type="number"
+                defaultValue={price}
                 className="w-full"
                 crossOrigin={""}
                 {...register("price", { valueAsNumber: true, required: true })}
@@ -82,6 +89,7 @@ const AddShoeModal = () => {
               {/* quantity  */}
               <Input
                 type="number"
+                defaultValue={quantity}
                 className="w-full"
                 crossOrigin={""}
                 {...register("quantity", {
@@ -94,6 +102,7 @@ const AddShoeModal = () => {
               {/* photo  */}
               <Input
                 className="w-full"
+                defaultValue={photoUrl}
                 crossOrigin={""}
                 {...register("photoUrl")}
                 label="Image URL"
@@ -104,6 +113,7 @@ const AddShoeModal = () => {
                 <div className="w-72">
                   <Controller
                     name="brand"
+                    defaultValue={brand}
                     control={control}
                     rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
@@ -128,6 +138,7 @@ const AddShoeModal = () => {
                 <div className="w-72">
                   <Controller
                     name="model"
+                    defaultValue={model}
                     control={control}
                     rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
@@ -158,6 +169,7 @@ const AddShoeModal = () => {
                 <div className="w-72">
                   <Controller
                     name="style"
+                    defaultValue={style}
                     rules={{ required: true }}
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
@@ -182,6 +194,7 @@ const AddShoeModal = () => {
                 <div className="w-72">
                   <Controller
                     name="color"
+                    defaultValue={color}
                     rules={{ required: true }}
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
@@ -205,7 +218,7 @@ const AddShoeModal = () => {
 
               {/* size  */}
               <div className="w-full">
-                <ShoeSizesSelect control={control} size={''} />
+                <ShoeSizesSelect control={control} size={size} />
               </div>
 
               <div className="flex justify-center">
@@ -235,4 +248,4 @@ const AddShoeModal = () => {
   );
 };
 
-export default AddShoeModal;
+export default UpdateShoeModal;

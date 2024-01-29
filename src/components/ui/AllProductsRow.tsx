@@ -1,10 +1,13 @@
 import { TProduct } from "../../pages/ALLProducts";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { FaPenRuler, FaRegTrashCan, FaSackDollar } from "react-icons/fa6";
+import {  FaRegTrashCan, FaSackDollar } from "react-icons/fa6";
 import { useDeleteProductMutation } from "../../redux/features/products/productsApi";
 import { toast } from "sonner";
+import UpdateShoeModal from "./UpdateShoeModal";
 
 const AllProductsRow = ({ product }: { product: TProduct }) => {
+  const [deleteProduct, { data }] = useDeleteProductMutation();
+
   const {
     photoUrl,
     name,
@@ -18,7 +21,6 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
     _id,
   } = product || {};
 
-  const [deleteProduct, { data }] = useDeleteProductMutation();
   if (data?.success) {
     toast.success("Product deleted successfully", { duration: 2000 });
   }
@@ -27,9 +29,12 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
 
   return (
     <tr key={photoUrl} className="text-center">
+      {/* photo  */}
       <td className={classes}>
         <img src={photoUrl} className="w-16" />
       </td>
+
+      {/* name  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -40,6 +45,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {name}
         </Typography>
       </td>
+
+      {/* price  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -50,6 +57,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {price}
         </Typography>
       </td>
+
+      {/* brand  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -60,6 +69,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {brand}
         </Typography>
       </td>
+
+      {/* color  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -70,6 +81,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {color}
         </Typography>
       </td>
+
+      {/* model  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -80,6 +93,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {model}
         </Typography>
       </td>
+
+      {/* quantity  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -90,6 +105,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {quantity}
         </Typography>
       </td>
+
+      {/* style  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -100,6 +117,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {style}
         </Typography>
       </td>
+
+      {/* size  */}
       <td className={classes}>
         <Typography
           placeholder={""}
@@ -110,6 +129,8 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {size.map((s) => s + ",")}
         </Typography>
       </td>
+
+      
       <td className={`${classes}  space-x-2`}>
         {/* delete  */}
         <Tooltip content="Delete">
@@ -121,15 +142,14 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
             <FaRegTrashCan size={18} color="black" />
           </Button>
         </Tooltip>
+
+
         {/* edit  */}
-        <Tooltip content="Edit">
-          <Button placeholder={""} className="p-2 rounded-md bg-green-200">
-            <FaPenRuler size={18} color="green" />
-          </Button>
-        </Tooltip>
+         <UpdateShoeModal product={product} />
+
         {/* sale  */}
         <Tooltip content="Sale">
-          <Button placeholder={""} className="p-2 rounded-md bg-blue-200">
+        <Button placeholder={""}  className="p-2 rounded-md bg-blue-200">
             <FaSackDollar size={18} color="blue" />
           </Button>
         </Tooltip>

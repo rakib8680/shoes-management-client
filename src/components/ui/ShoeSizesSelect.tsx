@@ -9,13 +9,15 @@ const options = [
   { value: "8", label: "Size 8" },
   { value: "9", label: "Size 9" },
   { value: "10", label: "Size 10" },
+  { value: "11", label: "Size 11" },
 ];
 
-const ShoeSizesSelect = ({ control }: { control: any }) => {
+const ShoeSizesSelect = ({ control, size }: { control: any , size:any}) => {
   return (
     <>
       <Controller
         name="size"
+        defaultValue={size}
         rules={{ required: true }}
         control={control}
         render={({ field: { onChange, value, ...field } }) => (

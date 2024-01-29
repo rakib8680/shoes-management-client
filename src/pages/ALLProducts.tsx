@@ -31,9 +31,13 @@ export type TProduct = {
 
 export type TProducts = TProduct[];
 
+
+
 const ALLProducts = () => {
   const { data } = useGetAllProductsQuery(undefined);
   const products: TProducts = data?.data;
+
+
   return (
     <div className="container mx-auto ">
 

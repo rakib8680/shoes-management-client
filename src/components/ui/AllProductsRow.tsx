@@ -55,7 +55,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           color="blue-gray"
           className="font-normal"
         >
-          {price}
+          ${price}
         </Typography>
       </td>
 

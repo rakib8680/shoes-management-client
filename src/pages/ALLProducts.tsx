@@ -49,7 +49,7 @@ const ALLProducts = () => {
 
       <Card
         placeholder={""}
-        className="h-full w-full overflow-x-scroll px-5 md:p-0"
+        className="h-full w-full overflow-x-auto px-5 md:p-0"
       >
         <table className="w-full min-w-max table-auto text-left">
           

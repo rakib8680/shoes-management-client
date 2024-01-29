@@ -7,6 +7,7 @@ import {
   Input,
   Select,
   Option,
+  Tooltip,
 } from "@material-tailwind/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import ShoeSizesSelect from "./ShoeSizesSelect";
@@ -54,19 +55,21 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
 
   return (
     <>
-      <Button
-        placeholder={""}
-        onClick={handleOpen}
-        className="p-2 rounded-md bg-green-200"
-      >
-        <FaPenRuler size={18} color="green" />
-      </Button>
+      <Tooltip content='Update'>
+        <Button
+          placeholder={""}
+          onClick={handleOpen}
+          className="p-2 rounded-md bg-green-200"
+        >
+          <FaPenRuler size={18} color="green" />
+        </Button>
+      </Tooltip>
 
       <Dialog placeholder={""} open={open} handler={handleOpen} className="p-5">
-        <DialogHeader placeholder={""}>Add a new pair of shoes !</DialogHeader>
+        <DialogHeader placeholder={""}>Update {name} !</DialogHeader>
         <DialogBody placeholder={""}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-7 mb-10 md:mt-10">
+            <div className="space-y-7 mb-3 md:mt-10">
               {/* name  */}
               <Input
                 className="w-full"
@@ -221,7 +224,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 <ShoeSizesSelect control={control} size={size} />
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex justify-center gap-10">
                 <Button
                   placeholder={""}
                   variant="text"

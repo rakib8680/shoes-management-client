@@ -1,5 +1,6 @@
 import { TProduct } from "../../pages/ALLProducts";
-import { Typography } from "@material-tailwind/react";
+import { Button, Tooltip, Typography } from "@material-tailwind/react";
+import { FaPenRuler, FaRegTrashCan, FaSackDollar } from "react-icons/fa6";
 
 const AllProductsRow = ({ product }: { product: TProduct }) => {
   const { photoUrl, name, price, brand, color, model, quantity, style, size } =
@@ -7,7 +8,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
   const classes = "p-4 border-b border-blue-gray-50";
 
   return (
-    <tr key={photoUrl}>
+    <tr key={photoUrl} className="text-center">
       <td className={classes}>
         <img src={photoUrl} className="w-16" />
       </td>
@@ -91,17 +92,22 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           {size.map((s) => s + ",")}
         </Typography>
       </td>
-      <td className={classes}>
-        <Typography
-          as="a"
-          placeholder={""}
-          href="#"
-          variant="small"
-          color="blue-gray"
-          className="font-medium"
-        >
-          Edit
-        </Typography>
+      <td className={`${classes}  space-x-2`}>
+        <Tooltip content="Delete">
+          <Button placeholder={""} className="p-2 rounded-md bg-pink-200">
+            <FaRegTrashCan size={18} color="black" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="Edit">
+          <Button placeholder={""} className="p-2 rounded-md bg-green-200">
+            <FaPenRuler size={18} color="green" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="Sale">
+          <Button placeholder={""} className="p-2 rounded-md bg-blue-200">
+            <FaSackDollar size={18} color="blue" />
+          </Button>
+        </Tooltip>
       </td>
     </tr>
   );

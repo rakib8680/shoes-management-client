@@ -8,6 +8,7 @@ const productsAPi = baseApi.injectEndpoints({
             url: "/products/all-shoes",
             method: "GET",
           }),
+          providesTags: ["products"],
         }),
         addProduct: builder.mutation({
           query: (productInfo) => ({
@@ -15,6 +16,7 @@ const productsAPi = baseApi.injectEndpoints({
             method: "POST",
             body: productInfo,
           }),
+          invalidatesTags: ["products"],
         }),
       }),
 })

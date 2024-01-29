@@ -10,15 +10,25 @@ import {
 } from "@material-tailwind/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import ShoeSizesSelect from "./ShoeSizesSelect";
+import { useAddProductMutation } from "../../redux/features/products/productsApi";
+import { toast } from "sonner";
 
 const AddShoeModal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
-
   const { register, handleSubmit, control } = useForm();
+  const [addProduct] = useAddProductMutation();
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+
+
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Adding...");
+    try {
+      await addProduct(data);
+      toast.success("Shoe added successfully", { id: toastId, duration: 2000 });
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   return (
@@ -46,7 +56,7 @@ const AddShoeModal = () => {
         </svg>
         Add Shoes
       </Button>
-      
+
       <Dialog placeholder={""} open={open} handler={handleOpen} className="p-5">
         <DialogHeader placeholder={""}>Add a new pair of shoes !</DialogHeader>
         <DialogBody placeholder={""}>

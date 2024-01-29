@@ -24,7 +24,7 @@ export type TProduct = {
   model: string;
   quantity: number;
   style: string;
-  size: [number];
+  size: number[];
   photoUrl?: string;
 };
 

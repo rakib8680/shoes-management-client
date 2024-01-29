@@ -6,53 +6,76 @@ import {
   DialogBody,
   Input,
 } from "@material-tailwind/react";
-import {  FieldValues, useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { FaSackDollar } from "react-icons/fa6";
+import { useSellProductMutation } from "../../redux/features/products/productsApi";
 
-const SellShoeModal = () => {
+const SellShoeModal = ({_id}:{_id:string}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
   const { register, handleSubmit } = useForm();
+  const [sellShoe]= useSellProductMutation();
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Adding...");
+
+    const payload = {
+        id:_id,
+        saleInfo : data
+    }
+    try{
+
+      await sellShoe(payload).unwrap();
+        toast.success("Shoe Sold Successfully", { id: toastId , duration: 2000});
+    }catch(err:any){
+        toast.error(err.data.errorMessage, { id: toastId , duration: 4000});
+    }
+
 
   };
 
   return (
     <>
       <Button
-        variant="gradient"
-        onClick={handleOpen}
-        color="blue-gray"
-        className="flex items-center gap-3 mb-3  ms-7 md:ms-0 px-3 py-2 md:px-6 md:py-3"
         placeholder={""}
+        onClick={handleOpen}
+        className="p-2 rounded-md bg-blue-200"
       >
-        Add Shoes
+        <FaSackDollar size={18} color="blue" />
       </Button>
 
-      <Dialog placeholder={""} open={open} handler={handleOpen} className="p-5">
+      <Dialog
+        placeholder={""}
+        size="xs"
+        open={open}
+        handler={handleOpen}
+        className="p-5"
+      >
         <DialogHeader placeholder={""}>Sale Shoes !</DialogHeader>
         <DialogBody placeholder={""}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-7 mb-10 ">
-            {/* name  */}
-            <Input
-              className="w-full"
-              crossOrigin={""}
-              {...register("name", { required: true })}
-              label="Name"
-            />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-7  ">
 
-            {/* price  */}
+            {/* Quantity  */}
             <Input
               type="number"
               className="w-full"
+              variant="standard"
               crossOrigin={""}
-              {...register("price", { valueAsNumber: true, required: true })}
-              label="Price"
+              {...register("quantity", { valueAsNumber: true, required: true })}
+              label="Quantity"
             />
 
-            <div className="flex justify-center">
+            {/* Buyer Name  */}
+            <Input
+              className="w-full"
+              crossOrigin={""}
+              variant="standard"
+              {...register("buyerName", { required: true })}
+              label="Buyer Name"
+            />
+
+            <div className="flex justify-center gap-10 pt-5">
               <Button
                 placeholder={""}
                 variant="text"
@@ -68,7 +91,7 @@ const SellShoeModal = () => {
                 type="submit"
                 onClick={handleOpen}
               >
-                Add
+                Sale
               </Button>
             </div>
           </form>

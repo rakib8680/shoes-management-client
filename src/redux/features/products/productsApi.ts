@@ -41,7 +41,7 @@ const productsAPi = baseApi.injectEndpoints({
     }),
     sellProduct: builder.mutation({
       query: (payload) => ({
-        url: `/products/update-shoe/${payload.id}`,
+        url: `/products/sell-shoes/${payload.id}`,
         method: "PATCH",
         body: payload.saleInfo,
       }),

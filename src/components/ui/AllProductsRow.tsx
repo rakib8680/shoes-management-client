@@ -1,9 +1,10 @@
 import { TProduct } from "../../pages/ALLProducts";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import {  FaRegTrashCan, FaSackDollar } from "react-icons/fa6";
+import {  FaRegTrashCan } from "react-icons/fa6";
 import { useDeleteProductMutation } from "../../redux/features/products/productsApi";
 import { toast } from "sonner";
 import UpdateShoeModal from "./UpdateShoeModal";
+import SellShoeModal from "./SellShoeModal";
 
 const AllProductsRow = ({ product }: { product: TProduct }) => {
   const [deleteProduct, { data }] = useDeleteProductMutation();
@@ -148,11 +149,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
          <UpdateShoeModal product={product} />
 
         {/* sale  */}
-        <Tooltip content="Sale">
-        <Button placeholder={""}  className="p-2 rounded-md bg-blue-200">
-            <FaSackDollar size={18} color="blue" />
-          </Button>
-        </Tooltip>
+        <SellShoeModal _id={_id}/>
       </td>
     </tr>
   );

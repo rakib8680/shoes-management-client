@@ -39,6 +39,14 @@ const productsAPi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["products"],
     }),
+    sellProduct: builder.mutation({
+      query: (payload) => ({
+        url: `/products/update-shoe/${payload.id}`,
+        method: "PATCH",
+        body: payload.saleInfo,
+      }),
+      invalidatesTags: ["products"],
+    }),
   }),
 });
 
@@ -47,5 +55,6 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
-  useGetSingleProductQuery
+  useGetSingleProductQuery,
+  useSellProductMutation,
 } = productsAPi;

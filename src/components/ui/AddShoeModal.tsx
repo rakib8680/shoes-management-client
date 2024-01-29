@@ -37,7 +37,7 @@ const AddShoeModal = () => {
         variant="gradient"
         onClick={handleOpen}
         color="blue-gray"
-        className="flex items-center gap-3 mb-3"
+        className="flex items-center gap-3 mb-3  ms-7 md:ms-0 px-3 py-2 md:px-6 md:py-3"
         placeholder={""}
       >
         <svg
@@ -61,7 +61,7 @@ const AddShoeModal = () => {
         <DialogHeader placeholder={""}>Add a new pair of shoes !</DialogHeader>
         <DialogBody placeholder={""}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-7 mb-10 mt-10">
+            <div className="space-y-7 mb-10 md:mt-10">
               {/* name  */}
               <Input
                 className="w-full"

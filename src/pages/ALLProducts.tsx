@@ -17,6 +17,7 @@ const TABLE_HEAD = [
 ];
 
 export type TProduct = {
+  _id: string;
   name: string;
   price: number;
   brand: string;
@@ -33,7 +34,6 @@ export type TProducts = TProduct[];
 const ALLProducts = () => {
   const { data } = useGetAllProductsQuery(undefined);
   const products: TProducts = data?.data;
-
   return (
     <div className="container mx-auto ">
 
@@ -45,7 +45,7 @@ const ALLProducts = () => {
 
       <Card
         placeholder={""}
-        className="h-full w-full overflow-x-scroll p-7 md:p-0"
+        className="h-full w-full overflow-x-scroll px-5 md:p-0"
       >
         <table className="w-full min-w-max table-auto text-left">
           

@@ -24,11 +24,15 @@ const ALLProducts = () => {
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
   const [model, setModel] = useState("");
+  const [style, setStyle] = useState("");
+  const [sort, setSort] = useState("");
 
   const { data } = useGetAllProductsQuery({
     brand: brand,
     color: color,
     model: model,
+    style: style,
+    sort: sort,
   });
   const products: TProducts = data?.data;
 
@@ -96,7 +100,41 @@ const ALLProducts = () => {
             <Option value="Comfit Oxford 2">Comfit Oxford 2</Option>
             <Option value="Ultra Boost 3">Ultra Boost 3</Option>
           </Select>
+
+          {/* filter by style  */}
+          <Select
+            placeholder={""}
+            label="Style"
+            className=""
+            onChange={(value: string | undefined) =>
+              value ? setStyle(value) : setStyle("")
+            }
+          >
+            <Option value="">All</Option>
+            <Option value="Running">Running</Option>
+            <Option value="Athletic">Athletic</Option>
+            <Option value="Basketball">Basketball</Option>
+            <Option value="Casual">Casual</Option>
+            <Option value="Fashion">Fashion</Option>
+          </Select>
+
+          {/* sort by release date  */}
+          <Select
+            placeholder={""}
+            label="Release Date"
+            className=""
+            onChange={(value: string | undefined) =>
+              value ? setSort(value) : setSort("")
+            }
+          >
+            <Option value="Latest">Latest</Option>
+            <Option value="">Earliest</Option>
+          </Select>
+
+
+
         </div>
+      
       </div>
 
       <AllProductsTable products={products} />

@@ -45,7 +45,7 @@ const AllProductsTable = ({ products }: { products: TProducts }) => {
             ))}
           </tr>
         </thead>
-
+            
         {/* table body  */}
         <tbody>
           {products?.map((product, index) => (

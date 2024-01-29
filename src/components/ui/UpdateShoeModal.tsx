@@ -240,7 +240,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                   type="submit"
                   onClick={handleOpen}
                 >
-                  Add
+                  Update
                 </Button>
               </div>
             </div>

@@ -3,10 +3,20 @@ import { baseApi } from "../../api/baseApi";
 const productsAPi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => ({
-        url: "/products/all-shoes",
-        method: "GET",
-      }),
+      query: ({brand,color,model}) => {
+        const params = new URLSearchParams();
+        if (brand) {
+          params.append("brand", brand);
+        }
+        if(color){
+          params.append("color", color);
+        }
+        if(model){
+          params.append("model", model);
+        }
+
+        return { url: `/products/all-shoes?${params}`, method: "GET" };
+      },
       providesTags: ["products"],
     }),
     getSingleProduct: builder.query({

@@ -20,6 +20,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
     style,
     size,
     _id,
+    createdAt,
   } = product || {};
 
   if (data?.success) {
@@ -131,8 +132,21 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
         </Typography>
       </td>
 
+
+      {/* Release Date  */}
+      <td className={classes}>
+        <Typography
+          placeholder={""}
+          variant="small"
+          color="blue-gray"
+          className="font-normal"
+        >
+          {createdAt?.split("T")[0]}
+        </Typography>
+      </td>
       
       <td className={`${classes}  space-x-2`}>
+        
         {/* delete  */}
         <Tooltip content="Delete">
           <Button
@@ -143,7 +157,6 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
             <FaRegTrashCan size={18} color="black" />
           </Button>
         </Tooltip>
-
 
         {/* edit  */}
          <UpdateShoeModal product={product} />

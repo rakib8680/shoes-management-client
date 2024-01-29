@@ -32,12 +32,12 @@ const AddShoeModal = () => {
   };
 
   return (
-    <>
+    <div className="md:ms-[300px] relative md:static top-40">
       <Button
         variant="gradient"
         onClick={handleOpen}
         color="blue-gray"
-        className="flex items-center gap-3 mb-3  ms-7 md:ms-0 px-3 py-2 md:px-6 md:py-3"
+        className="flex items-center gap-3 mb-3  ms-7 md:ms-0 px-6 py-3 md:px-6 md:py-3"
         placeholder={""}
       >
         <svg
@@ -232,7 +232,7 @@ const AddShoeModal = () => {
           </form>
         </DialogBody>
       </Dialog>
-    </>
+    </div>
   );
 };
 

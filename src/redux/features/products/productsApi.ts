@@ -3,22 +3,25 @@ import { baseApi } from "../../api/baseApi";
 const productsAPi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: ({brand,color,model, style, sort}) => {
+      query: ({ brand, color, model, style, sort, size }) => {
         const params = new URLSearchParams();
         if (brand) {
           params.append("brand", brand);
         }
-        if(color){
+        if (color) {
           params.append("color", color);
         }
-        if(model){
+        if (model) {
           params.append("model", model);
         }
-        if(style){
+        if (style) {
           params.append("style", style);
         }
-        if(sort){
+        if (sort) {
           params.append("sort", sort);
+        }
+        if (size) {
+          params.append("size", size);
         }
 
         return { url: `/products/all-shoes?${params}`, method: "GET" };

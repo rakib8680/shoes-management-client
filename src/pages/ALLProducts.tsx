@@ -26,6 +26,7 @@ const ALLProducts = () => {
   const [model, setModel] = useState("");
   const [style, setStyle] = useState("");
   const [sort, setSort] = useState("");
+  const [size, setSize] = useState("");
 
   const { data } = useGetAllProductsQuery({
     brand: brand,
@@ -33,19 +34,20 @@ const ALLProducts = () => {
     model: model,
     style: style,
     sort: sort,
+    size: size,
   });
   const products: TProducts = data?.data;
 
   return (
-    <div className="container mx-auto ">
+    <div className="">
       <h1 className="text-center py-10 text-2xl text-blue-gray-500 font-extrabold">
         Total Products: {products?.length}
       </h1>
       <AddShoeModal />
 
-      <div className="flex justify-between items-center flex-wrap">
-        <h1 className="text-blue-gray-400 font-medium text-md">Filter By: </h1>
-        <div className="flex">
+      <div className="flex flex-col  md:justify-between items-end md:items-start md:ms-[300px] flex-wrap me-10 md:me-0 mb-5 md:mb-0">
+        <h1 className="text-blue-gray-400 font-medium text-md md:py-3">Filter By: </h1>
+        <div className="flex  flex-wrap md:flex-nowrap w-2/5 md:w-auto md:pb-5">
           {/* filter by brand  */}
           <Select
             placeholder={""}
@@ -118,6 +120,24 @@ const ALLProducts = () => {
             <Option value="Fashion">Fashion</Option>
           </Select>
 
+          {/* filter by size  */}
+          <Select
+            placeholder={""}
+            label="Size"
+            className=""
+            onChange={(value: string | undefined) =>
+              value ? setSize(value) : setSize("")
+            }
+          >
+            <Option value="">All</Option>
+            <Option value="6">6</Option>
+            <Option value="7">7</Option>
+            <Option value="8">8</Option>
+            <Option value="9">9</Option>
+            <Option value="10">10</Option>
+            <Option value="11">11</Option>
+          </Select>
+
           {/* sort by release date  */}
           <Select
             placeholder={""}
@@ -137,7 +157,9 @@ const ALLProducts = () => {
       
       </div>
 
-      <AllProductsTable products={products} />
+    <div className="container mx-auto">
+    <AllProductsTable products={products} />
+    </div>
     </div>
   );
 };

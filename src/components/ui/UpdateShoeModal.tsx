@@ -93,7 +93,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
         <DialogHeader placeholder={""}>Update {name} !</DialogHeader>
         <DialogBody placeholder={""}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-7 mb-3 md:mt-10">
+            <div className="md:space-y-7 space-y-3 mb-3 md:mt-10 ">
               {/* name  */}
               <Input
                 className="w-full"
@@ -135,9 +135,9 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 label="Image URL"
               />
 
-              <div className="flex justify-between">
+              <div className="md:flex justify-between space-y-3 md:space-y-0">
                 {/* brand   */}
-                <div className="w-72">
+                <div className="w-full md:w-72">
                   <Controller
                     name="brand"
                     defaultValue={brand}
@@ -162,7 +162,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 </div>
 
                 {/* model   */}
-                <div className="w-72">
+                <div className="w-full md:w-72">
                   <Controller
                     name="model"
                     defaultValue={model}
@@ -191,9 +191,9 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 </div>
               </div>
 
-              <div className="flex justify-between">
+              <div className="md:flex justify-between space-y-3 md:space-y-0">
                 {/* style  */}
-                <div className="w-72">
+                <div className="w-full md:w-72">
                   <Controller
                     name="style"
                     defaultValue={style}
@@ -218,7 +218,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 </div>
 
                 {/* color  */}
-                <div className="w-72">
+                <div className="w-full md:w-72">
                   <Controller
                     name="color"
                     defaultValue={color}
@@ -248,7 +248,8 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 <ShoeSizesSelect control={control} size={size} />
               </div>
 
-              <div className="flex justify-end md:justify-center gap-10">
+              <div className="flex flex-col md:flex-row justify-end md:justify-center md:gap-10">
+                {/* cancel  */}
                 <Button
                   placeholder={""}
                   variant="text"
@@ -258,6 +259,8 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 >
                   <span>Cancel</span>
                 </Button>
+
+                {/* update  */}
                 <Button
                   placeholder={""}
                   variant="gradient"
@@ -269,11 +272,12 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
               </div>
             </div>
           </form>
+          {/* duplicate  */}
           <Button
             placeholder={""}
             variant="outlined"
             size="sm"
-            className="relative bottom-12"
+            className="md:relative bottom-12  w-full md:w-auto"
             onClick={() => handleDuplicate(product)}
           >
             Duplicate

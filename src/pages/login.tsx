@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-gray-600 to-white ">
+    <div className="login-reg-container">
       <div className="bg-gradient-to-br from-white to-blue-gray-300 p-8 rounded-lg shadow-md w-96">
         <h2 className="text-4xl font-extrabold mb-6 text-gray-800 text-center">
           Please Login !

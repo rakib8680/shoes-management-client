@@ -31,7 +31,7 @@ const AddShoeModal = () => {
   };
 
   return (
-    <div className="md:ms-[220px] relative md:static top-40">
+    <div className=" pt-7 pb-3">
       <Button
         variant="gradient"
         onClick={handleOpen}
@@ -98,9 +98,9 @@ const AddShoeModal = () => {
                 label="Image URL"
               />
 
-              <div className="flex justify-between">
+              <div className="md:flex justify-between space-y-7 md:space-y-0">
                 {/* brand   */}
-                <div className="w-72">
+                <div className="md:w-72">
                   <Controller
                     name="brand"
                     control={control}
@@ -124,7 +124,7 @@ const AddShoeModal = () => {
                 </div>
 
                 {/* model   */}
-                <div className="w-72">
+                <div className="md:w-72">
                   <Controller
                     name="model"
                     control={control}
@@ -152,9 +152,9 @@ const AddShoeModal = () => {
                 </div>
               </div>
 
-              <div className="flex justify-between">
+              <div className="md:flex justify-between space-y-7 md:space-y-0">
                 {/* style  */}
-                <div className="w-72">
+                <div className="md:w-72">
                   <Controller
                     name="style"
                     rules={{ required: true }}
@@ -178,7 +178,7 @@ const AddShoeModal = () => {
                 </div>
 
                 {/* color  */}
-                <div className="w-72">
+                <div className="md:w-72">
                   <Controller
                     name="color"
                     rules={{ required: true }}

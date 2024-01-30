@@ -9,11 +9,11 @@
 }
 
 .filter-container {
-  @apply flex flex-col  md:justify-between items-end md:items-start md:ms-[220px] flex-wrap me-10 md:me-0 mb-5 md:mb-0;
+  @apply flex flex-col  md:justify-between  md:items-start text-center flex-wrap  md:me-0 mb-5 md:mb-0 w-full px-10 md:px-0;
 }
 
 .filter-div{
-  @apply flex  flex-wrap gap-1 md:gap-x-2 md:flex-nowrap w-2/5 md:w-auto md:pb-5 items-center
+  @apply md:flex space-y-2 md:space-y-0 md:gap-x-2 md:flex-nowrap md:w-auto md:pb-5 items-center 
 }
 
 .total-products-text{
@@ -21,9 +21,14 @@
 }
 
 .addShoesBtn{
-  @apply flex items-center gap-3 mb-3  ms-7 md:ms-0 px-6 py-3 md:px-6 md:py-3
+  @apply flex items-center gap-3 mb-3 md:mb-0  px-6 py-3 md:px-6 md:py-3
 }
 
 .filterSalesHistory{
   @apply px-4 py-2 border border-gray-300 rounded-md shadow-sm text-base focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
 }
+
+.login-reg-container{
+  @apply flex items-center justify-center h-screen bg-gradient-to-br from-blue-gray-600 to-white p-5 md:p-0
+}
+

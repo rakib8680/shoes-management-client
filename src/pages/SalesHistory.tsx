@@ -75,7 +75,7 @@ const SalesHistory = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto pb-28">
       <h1 className="text-center py-10 text-2xl text-blue-gray-500 font-extrabold">
         All Sales History
       </h1>

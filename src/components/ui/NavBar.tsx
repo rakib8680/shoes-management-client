@@ -35,7 +35,7 @@ const NavBar = () => {
     <div className=" max-h-[768px] w-full">
       <Navbar
         placeholder={""}
-        className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:pl-8 lg:pr-20 lg:py-4  bg-gradient-to-br from-blue-gray-200 to-blue-gray-50"
+        className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-5 lg:pl-8 lg:pr-20 lg:py-6  bg-gradient-to-br from-blue-gray-200 to-blue-gray-50"
       >
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography

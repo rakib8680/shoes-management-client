@@ -13,7 +13,10 @@ import { Controller, FieldValues, useForm } from "react-hook-form";
 import ShoeSizesSelect from "./ShoeSizesSelect";
 import { FaPenRuler } from "react-icons/fa6";
 import { TProduct } from "../../pages/ALLProducts";
-import { useUpdateProductMutation } from "../../redux/features/products/productsApi";
+import {
+  useAddProductMutation,
+  useUpdateProductMutation,
+} from "../../redux/features/products/productsApi";
 import { toast } from "sonner";
 
 const UpdateShoeModal = ({ product }: { product: TProduct }) => {
@@ -21,6 +24,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
   const handleOpen = () => setOpen(!open);
   const { register, handleSubmit, control } = useForm();
   const [updateProduct] = useUpdateProductMutation();
+  const [makeDuplicate] = useAddProductMutation();
 
   const {
     name,
@@ -53,9 +57,29 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
     }
   };
 
+  // handle create duplicate shoe
+  const handleDuplicate = async (product: TProduct) => {
+    const newProduct = {
+      ...product,
+      _id: undefined,
+    };
+
+    const toastId = toast.loading("Duplicating...");
+    try {
+      await makeDuplicate(newProduct);
+      toast.success("Shoe duplicated successfully", {
+        id: toastId,
+        duration: 2000,
+      });
+      handleOpen();
+    } catch (error) {
+      toast.error("Something went wrong", { id: toastId, duration: 2000 });
+    }
+  };
+
   return (
     <>
-      <Tooltip content='Update'>
+      <Tooltip content="Update or Duplicate">
         <Button
           placeholder={""}
           onClick={handleOpen}
@@ -224,7 +248,7 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
                 <ShoeSizesSelect control={control} size={size} />
               </div>
 
-              <div className="flex justify-center gap-10">
+              <div className="flex justify-end md:justify-center gap-10">
                 <Button
                   placeholder={""}
                   variant="text"
@@ -245,6 +269,15 @@ const UpdateShoeModal = ({ product }: { product: TProduct }) => {
               </div>
             </div>
           </form>
+          <Button
+            placeholder={""}
+            variant="outlined"
+            size="sm"
+            className="relative bottom-12"
+            onClick={() => handleDuplicate(product)}
+          >
+            Duplicate
+          </Button>
         </DialogBody>
       </Dialog>
     </>

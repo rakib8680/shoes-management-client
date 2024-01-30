@@ -159,7 +159,9 @@ const ALLProducts = () => {
 
           {/* filter by Min price */}
           <div className="w-full">
-            <div className="text-center text-xs text-blue-gray-400">Min Price</div>
+            <div className="text-center text-xs text-blue-gray-400">
+              Min Price
+            </div>
             <input
               type="range"
               min={0}
@@ -168,11 +170,13 @@ const ALLProducts = () => {
               onChange={(e) => setMinPrice(Number(e.target.value))}
               className="w-full h-1 bg-gray-200 rounded-full outline-none appearance-none"
             />
-            <div className="text-center ">{minPrice}</div>
+            <div className="text-center text-blue-gray-400">{minPrice}</div>
           </div>
           {/* filter by Max price */}
           <div className="w-full">
-            <div className="text-center text-xs text-blue-gray-400">Max Price</div>
+            <div className="text-center text-xs text-blue-gray-400">
+              Max Price
+            </div>
             <input
               type="range"
               min={0}
@@ -181,12 +185,12 @@ const ALLProducts = () => {
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               className="w-full h-1 bg-gray-200 rounded-full outline-none appearance-none"
             />
-            <div className="text-center ">{maxPrice}</div>
+            <div className="text-center text-blue-gray-400">{maxPrice}</div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto mb-40">
         <AllProductsTable products={products} />
       </div>
     </>

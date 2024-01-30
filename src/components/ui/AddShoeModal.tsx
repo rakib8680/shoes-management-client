@@ -37,7 +37,7 @@ const AddShoeModal = () => {
         variant="gradient"
         onClick={handleOpen}
         color="blue-gray"
-        className="flex items-center gap-3 mb-3  ms-7 md:ms-0 px-6 py-3 md:px-6 md:py-3"
+        className="addShoesBtn"
         placeholder={""}
       >
         <svg
@@ -209,7 +209,7 @@ const AddShoeModal = () => {
               </div>
 
 
-              <div className="flex justify-center">
+              <div className="flex justify-center gap-10">
                 <Button
                   placeholder={""}
                   variant="text"

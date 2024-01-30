@@ -43,17 +43,17 @@ const ALLProducts = () => {
   const products: TProducts = data?.data;
 
   return (
-    <div className="">
-      <h1 className="text-center md:py-10 pt-10 text-2xl text-blue-gray-500 font-extrabold">
+    <>
+      <h1 className="total-products-text">
         Total Products: {products?.length}
       </h1>
       <AddShoeModal />
 
-      <div className="flex flex-col  md:justify-between items-end md:items-start md:ms-[300px] flex-wrap me-10 md:me-0 mb-5 md:mb-0">
-        <h1 className="text-blue-gray-400 font-medium text-md md:py-3">
+      <div className="filter-container">
+        <h1 className="text-blue-gray-400 font-medium text-md md:pt-3">
           Filter By:{" "}
         </h1>
-        <div className="flex  flex-wrap gap-1 md:gap-x-1 md:flex-nowrap w-2/5 md:w-auto md:pb-5 items-center">
+        <div className="filter-div">
           {/* filter by brand  */}
           <Select
             placeholder={""}
@@ -189,7 +189,7 @@ const ALLProducts = () => {
       <div className="container mx-auto">
         <AllProductsTable products={products} />
       </div>
-    </div>
+    </>
   );
 };
 

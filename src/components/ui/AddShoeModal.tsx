@@ -32,7 +32,7 @@ const AddShoeModal = () => {
   };
 
   return (
-    <div className="md:ms-[300px] relative md:static top-40">
+    <div className="md:ms-[220px] relative md:static top-40">
       <Button
         variant="gradient"
         onClick={handleOpen}

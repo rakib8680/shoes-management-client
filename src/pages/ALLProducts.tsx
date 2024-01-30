@@ -27,6 +27,8 @@ const ALLProducts = () => {
   const [style, setStyle] = useState("");
   const [sort, setSort] = useState("");
   const [size, setSize] = useState("");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
 
   const { data } = useGetAllProductsQuery({
     brand: brand,
@@ -35,19 +37,23 @@ const ALLProducts = () => {
     style: style,
     sort: sort,
     size: size,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
   });
   const products: TProducts = data?.data;
 
   return (
     <div className="">
-      <h1 className="text-center py-10 text-2xl text-blue-gray-500 font-extrabold">
+      <h1 className="text-center md:py-10 pt-10 text-2xl text-blue-gray-500 font-extrabold">
         Total Products: {products?.length}
       </h1>
       <AddShoeModal />
 
       <div className="flex flex-col  md:justify-between items-end md:items-start md:ms-[300px] flex-wrap me-10 md:me-0 mb-5 md:mb-0">
-        <h1 className="text-blue-gray-400 font-medium text-md md:py-3">Filter By: </h1>
-        <div className="flex  flex-wrap md:flex-nowrap w-2/5 md:w-auto md:pb-5">
+        <h1 className="text-blue-gray-400 font-medium text-md md:py-3">
+          Filter By:{" "}
+        </h1>
+        <div className="flex  flex-wrap gap-1 md:gap-x-1 md:flex-nowrap w-2/5 md:w-auto md:pb-5 items-center">
           {/* filter by brand  */}
           <Select
             placeholder={""}
@@ -151,15 +157,38 @@ const ALLProducts = () => {
             <Option value="">Earliest</Option>
           </Select>
 
-
-
+          {/* filter by Min price */}
+          <div className="w-full">
+            <div className="text-center text-xs text-blue-gray-400">Min Price</div>
+            <input
+              type="range"
+              min={0}
+              max={500}
+              value={minPrice}
+              onChange={(e) => setMinPrice(Number(e.target.value))}
+              className="w-full h-1 bg-gray-200 rounded-full outline-none appearance-none"
+            />
+            <div className="text-center ">{minPrice}</div>
+          </div>
+          {/* filter by Max price */}
+          <div className="w-full">
+            <div className="text-center text-xs text-blue-gray-400">Max Price</div>
+            <input
+              type="range"
+              min={0}
+              max={2000}
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              className="w-full h-1 bg-gray-200 rounded-full outline-none appearance-none"
+            />
+            <div className="text-center ">{maxPrice}</div>
+          </div>
         </div>
-      
       </div>
 
-    <div className="container mx-auto">
-    <AllProductsTable products={products} />
-    </div>
+      <div className="container mx-auto">
+        <AllProductsTable products={products} />
+      </div>
     </div>
   );
 };

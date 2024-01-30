@@ -3,7 +3,7 @@ import { baseApi } from "../../api/baseApi";
 const productsAPi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: ({ brand, color, model, style, sort, size }) => {
+      query: ({ brand, color, model, style, sort, size, minPrice, maxPrice }) => {
         const params = new URLSearchParams();
         if (brand) {
           params.append("brand", brand);
@@ -22,6 +22,12 @@ const productsAPi = baseApi.injectEndpoints({
         }
         if (size) {
           params.append("size", size);
+        }
+        if (minPrice) {
+          params.append("minPrice", minPrice);
+        }
+        if (maxPrice) {
+          params.append("maxPrice", maxPrice);
         }
 
         return { url: `/products/all-shoes?${params}`, method: "GET" };

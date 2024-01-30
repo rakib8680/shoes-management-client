@@ -9,11 +9,11 @@
 }
 
 .filter-container {
-  @apply flex flex-col  md:justify-between  md:items-start text-center flex-wrap  md:me-0 mb-5 md:mb-0 w-full px-10 md:px-0;
+  @apply flex flex-col  md:justify-between  md:items-center text-center flex-wrap  md:me-0 mb-5 md:mb-0 w-full px-10 md:px-0;
 }
 
 .filter-div{
-  @apply md:flex space-y-2 md:space-y-0 md:gap-x-2 md:flex-nowrap md:w-auto md:pb-5 items-center 
+  @apply  space-y-2 md:space-y-0 md:gap-x-2 md:grid md:grid-cols-4 2xl:grid-rows-2  md:w-auto md:pb-5 items-center 
 }
 
 .total-products-text{

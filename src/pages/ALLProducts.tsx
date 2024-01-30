@@ -47,7 +47,7 @@ const ALLProducts = () => {
       <h1 className="total-products-text">
         Total Products: {products?.length}
       </h1>
-      <div className="flex flex-col items-center md:items-start md:ms-[220px]">
+      <div className="flex flex-col items-center md:items-center md:p-10  ">
         <AddShoeModal />
 
         <div className="filter-container">

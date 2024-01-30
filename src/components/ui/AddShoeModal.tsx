@@ -16,16 +16,15 @@ import { toast } from "sonner";
 const AddShoeModal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control, reset } = useForm();
   const [addProduct] = useAddProductMutation();
-
-
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Adding...");
     try {
       await addProduct(data);
       toast.success("Shoe added successfully", { id: toastId, duration: 2000 });
+      reset();
     } catch (err) {
       toast.error("Something went wrong", { id: toastId, duration: 2000 });
     }
@@ -205,9 +204,8 @@ const AddShoeModal = () => {
 
               {/* size  */}
               <div className="w-full">
-                <ShoeSizesSelect control={control} size={''} />
+                <ShoeSizesSelect control={control} size={""} />
               </div>
-
 
               <div className="flex justify-center gap-10">
                 <Button

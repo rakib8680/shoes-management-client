@@ -43,7 +43,7 @@ const ALLProducts = () => {
   const products: TProducts = data?.data;
 
   return (
-    <>
+    <div >
       <h1 className="total-products-text">
         Total Products: {products?.length}
       </h1>
@@ -193,7 +193,7 @@ const ALLProducts = () => {
       <div className="container mx-auto mb-40">
         <AllProductsTable products={products} />
       </div>
-    </>
+    </div>
   );
 };
 

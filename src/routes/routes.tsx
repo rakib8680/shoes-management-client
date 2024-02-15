@@ -6,6 +6,7 @@ import ALLProducts from "../pages/ALLProducts";
 import SalesHistory from "../pages/SalesHistory";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import Services from "../pages/Services";
+import VerifyProduct from "../pages/VerifyProduct";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="buyer">
             <Services />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "verifyProduct",
+        element: (
+          <ProtectedRoute role="buyer">
+            <VerifyProduct />
           </ProtectedRoute>
         ),
       },

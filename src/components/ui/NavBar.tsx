@@ -15,6 +15,8 @@ import {
 } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { verifyToken } from "../../utils/verifyToken";
+import { FaCube, FaScrewdriverWrench } from "react-icons/fa6";
+import { BsClipboardCheckFill } from "react-icons/bs";
 
 const NavBar = () => {
   // get user role from token
@@ -62,9 +64,12 @@ const NavBar = () => {
                   placeholder={""}
                   variant="gradient"
                   size="md"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block "
                 >
-                  All Products
+                  <div className="flex items-center gap-2">
+                    <FaCube size={16} />
+                    All Products
+                  </div>
                 </Button>
               </NavLink>
               {user?.role === "seller" && (
@@ -76,6 +81,36 @@ const NavBar = () => {
                     className="hidden lg:inline-block"
                   >
                     Sales History
+                  </Button>
+                </NavLink>
+              )}
+              {user?.role === "buyer" && (
+                <NavLink to="services">
+                  <Button
+                    placeholder={""}
+                    variant="outlined"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaScrewdriverWrench size={16} />
+                      Services
+                    </div>
+                  </Button>
+                </NavLink>
+              )}
+              {user?.role === "buyer" && (
+                <NavLink to="verifyProduct">
+                  <Button
+                    placeholder={""}
+                    variant="gradient"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <BsClipboardCheckFill size={16} />
+                      Verify Product
+                    </div>
                   </Button>
                 </NavLink>
               )}

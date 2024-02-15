@@ -10,7 +10,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute role={undefined}>
         <App />
       </ProtectedRoute>
     ),
@@ -21,7 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "salesHistory",
-        element: <SalesHistory />,
+        element: (
+          <ProtectedRoute role="seller">
+            <SalesHistory />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

@@ -7,23 +7,32 @@ import {
   Collapse,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hook";
-import { logOut } from "../../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import {
+  TUser,
+  logOut,
+  selectCurrentToken,
+} from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
-
-
+import { verifyToken } from "../../utils/verifyToken";
 
 const NavBar = () => {
-
+  // get user role from token
   const dispatch = useAppDispatch();
-
-  const handleLogOut= ()=>{
-    dispatch(logOut())
-    toast.error('LogOut successful', {duration:2000} )
+  const token = useAppSelector(selectCurrentToken);
+  let user;
+  if (token) {
+    user = verifyToken(token) as TUser;
   }
 
-  const [openNav, setOpenNav] = React.useState(false);
+  // logout
+  const handleLogOut = () => {
+    dispatch(logOut());
+    toast.error("LogOut successful", { duration: 2000 });
+  };
 
+  // open close nav for mobile
+  const [openNav, setOpenNav] = React.useState(false);
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -58,16 +67,18 @@ const NavBar = () => {
                   All Products
                 </Button>
               </NavLink>
-              <NavLink to="salesHistory">
-                <Button
-                  placeholder={""}
-                  variant="outlined"
-                  size="md"
-                  className="hidden lg:inline-block"
-                >
-                  Sales History
-                </Button>
-              </NavLink>
+              {user?.role === "seller" && (
+                <NavLink to="salesHistory">
+                  <Button
+                    placeholder={""}
+                    variant="outlined"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    Sales History
+                  </Button>
+                </NavLink>
+              )}
             </div>
             <IconButton
               placeholder={""}
@@ -145,7 +156,7 @@ const NavBar = () => {
               </Button>
             </NavLink>
             <Button
-            onClick={handleLogOut}
+              onClick={handleLogOut}
               placeholder={""}
               variant="filled"
               size="sm"

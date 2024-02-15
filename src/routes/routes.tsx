@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import ALLProducts from "../pages/ALLProducts";
 import SalesHistory from "../pages/SalesHistory";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
+import Services from "../pages/Services";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="seller">
             <SalesHistory />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "services",
+        element: (
+          <ProtectedRoute role="buyer">
+            <Services />
           </ProtectedRoute>
         ),
       },

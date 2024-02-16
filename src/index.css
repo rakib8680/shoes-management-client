@@ -39,3 +39,11 @@
 .card-gradient {
   @apply absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60;
 }
+
+.custom-button {
+  @apply rounded-none hover:bg-blue-gray-900 hover:text-white  border border-blue-gray-400 uppercase text-xs font-semibold text-blue-gray-800 transition-all duration-300;
+}
+
+.large-text {
+  font-size: 2rem;
+}

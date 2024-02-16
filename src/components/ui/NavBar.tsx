@@ -46,8 +46,9 @@ const NavBar = () => {
     <div className=" max-h-[768px] w-full">
       <Navbar
         placeholder={""}
-        className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-5 lg:pl-8 lg:pr-20 lg:py-6  bg-gradient-to-br from-blue-gray-200 to-blue-gray-50"
+        className="navbar-container"
       >
+        {/* for desktop */}
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             placeholder={""}
@@ -174,22 +175,46 @@ const NavBar = () => {
                 fullWidth
                 variant="gradient"
                 size="sm"
-                className=""
+                className="px-6"
               >
-                All Products
+                <div className="flex items-center gap-2">
+                  <FaCube size={16} />
+                  All Products
+                </div>
               </Button>
             </NavLink>
-            <NavLink to="salesHistory">
-              <Button
-                placeholder={""}
-                fullWidth
-                variant="outlined"
-                size="sm"
-                className=""
-              >
-                Sales History
-              </Button>
-            </NavLink>
+            {user?.role === "seller" && (
+              <NavLink to="salesHistory">
+                <Button placeholder={""} fullWidth variant="outlined" size="sm">
+                  Sales History
+                </Button>
+              </NavLink>
+            )}
+            {user?.role === "buyer" && (
+              <NavLink to="services">
+                <Button
+                  placeholder={""}
+                  variant="outlined"
+                  size="sm"
+                  className="h-8 px-10"
+                >
+                  <div className="flex items-center gap-2">
+                    <FaScrewdriverWrench size={16} />
+                    Services
+                  </div>
+                </Button>
+              </NavLink>
+            )}
+            {user?.role === "buyer" && (
+              <NavLink to="verifyProduct">
+                <Button placeholder={""} variant="gradient" size="sm">
+                  <div className="flex items-center gap-2">
+                    <BsClipboardCheckFill size={16} />
+                    Verify Product
+                  </div>
+                </Button>
+              </NavLink>
+            )}
             <Button
               onClick={handleLogOut}
               placeholder={""}

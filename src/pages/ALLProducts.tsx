@@ -15,6 +15,8 @@ export type TProduct = {
   brand: string;
   color: string;
   model: string;
+  isAuthentic: boolean;
+  uniqueId: string;
   quantity: number;
   style: string;
   size: number[];
@@ -205,8 +207,11 @@ const ALLProducts = () => {
       </div>
 
       <div className="container mx-auto mb-40">
-        {user?.role === "seller" && <AllProductsTable products={products} />}
-        {user?.role === "buyer" && <AllProductsCards products={products} />}
+        {user?.role === "seller" ? (
+          <AllProductsTable products={products} />
+        ) : (
+          <AllProductsCards products={products} />
+        )}
       </div>
     </div>
   );

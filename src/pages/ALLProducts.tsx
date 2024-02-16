@@ -3,6 +3,10 @@ import AddShoeModal from "../components/ui/AddShoeModal";
 import AllProductsTable from "../components/ui/AllProductsTable";
 import { useGetAllProductsQuery } from "../redux/features/products/productsApi";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hook";
+import { TUser, selectCurrentToken } from "../redux/features/auth/authSlice";
+import { verifyToken } from "../utils/verifyToken";
+import AllProductsCards from "./AllProductsCards";
 
 export type TProduct = {
   _id: string;
@@ -30,6 +34,13 @@ const ALLProducts = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
+  // get user role from token
+  const token = useAppSelector(selectCurrentToken);
+  let user;
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
+
   const { data } = useGetAllProductsQuery({
     brand: brand,
     color: color,
@@ -47,8 +58,8 @@ const ALLProducts = () => {
       <h1 className="total-products-text">
         Total Products: {products?.length}
       </h1>
-      <div className="flex flex-col items-center md:items-center md:p-10  ">
-        <AddShoeModal />
+      <div className="flex flex-col items-center md:items-center md:p-10">
+        {user?.role === "seller" && <AddShoeModal />}
 
         <div className="filter-container">
           <h1 className="text-blue-gray-400 font-medium text-md md:pt-3 pb-2 md:pb-0">
@@ -173,6 +184,7 @@ const ALLProducts = () => {
               />
               <div className="text-center text-blue-gray-400">{minPrice}</div>
             </div>
+
             {/* filter by Max price */}
             <div className="w-full">
               <div className="text-center text-xs text-blue-gray-400">
@@ -193,7 +205,8 @@ const ALLProducts = () => {
       </div>
 
       <div className="container mx-auto mb-40">
-        <AllProductsTable products={products} />
+        {user?.role === "seller" && <AllProductsTable products={products} />}
+        {user?.role === "buyer" && <AllProductsCards products={products} />}
       </div>
     </div>
   );

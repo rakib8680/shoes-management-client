@@ -10,6 +10,25 @@ const serviceApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllPolishServices: builder.query({
+      query: () => {
+        return {
+          url: "/services/polish-services",
+          method: "GET",
+        };
+      },
+      providesTags: ["services"],
+    }),
+    requestPolish: builder.mutation({
+      query: (payload) => {
+        return {
+          url: "/services/request-polish",
+          method: "POST",
+          body: payload,
+        };
+      },
+      invalidatesTags: ["services"],
+    }),
   }),
 });
 

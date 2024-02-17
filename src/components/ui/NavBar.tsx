@@ -44,10 +44,7 @@ const NavBar = () => {
 
   return (
     <div className=" max-h-[768px] w-full">
-      <Navbar
-        placeholder={""}
-        className="navbar-container"
-      >
+      <Navbar placeholder={""} className="navbar-container">
         {/* for desktop */}
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography

@@ -47,3 +47,7 @@
 .large-text {
   font-size: 2rem;
 }
+
+.shoe-details {
+  @apply font-semibold font-serif text-lg text-blue-gray-700
+}

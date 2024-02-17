@@ -4,11 +4,9 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { useVerifyProductQuery } from "../redux/features/Services/serviceApi";
 import { useState } from "react";
 
-// start-from-here
 
 const VerifyProduct = () => {
   const { register, handleSubmit } = useForm();
-  // const [verifiedProduct, setVerifiedProduct] = useState({});
   const [uniqueId, setUniqueId] = useState("");
   const { data: verifiedData, error } = useVerifyProductQuery(uniqueId, {
     skip: !uniqueId,
@@ -17,8 +15,6 @@ const VerifyProduct = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setUniqueId(data.uniqueId);
   };
-
-  console.log(verifiedData, error);
 
   return (
     <div className="container mx-auto py-10 h-[60vh] flex flex-col items-center justify-center gap-20">
@@ -42,7 +38,55 @@ const VerifyProduct = () => {
         </button>
       </form>
 
-      <div>hi</div>
+      {error && (
+        <p className="text-red-800 text-center text-2xl  bg-pink-50 px-14 py-3">
+          {error?.data?.errorMessage} ❌
+        </p>
+      )}
+      <div>
+        {verifiedData && (
+          <div className="">
+            <h1 className="text-green-800  text-2xl  bg-lime-50 px-14 py-3 text-center ">
+              Your Product Is Authentic ✔
+            </h1>
+            <div className="flex gap-20  items-center tracking-wide">
+              <div className=" bg-blue-gray-50 p-7  space-y-3 ">
+                <p>
+                  <span className="shoe-details">Product Name :</span>
+                  {verifiedData?.data?.name}
+                </p>
+                <p>
+                  <span className="shoe-details">Product Price :</span>
+                  {verifiedData?.data?.price}
+                </p>
+                <p>
+                  <span className="shoe-details">Product Quantity :</span>
+                  {verifiedData?.data?.quantity}
+                </p>
+                <p>
+                  <span className="shoe-details">Product Sizes :</span>
+                  {verifiedData?.data?.size.join(",")}
+                </p>
+                <p>
+                  <span className="shoe-details">Product Model :</span>
+                  {verifiedData?.data?.model}
+                </p>
+                <p>
+                  <span className="shoe-details">Product Color :</span>
+                  {verifiedData?.data?.color}
+                </p>
+                <p>
+                  <span className="shoe-details">Product Style :</span>
+                  {verifiedData?.data?.style}
+                </p>
+              </div>
+              <div className="">
+                <img className="w-96" src={verifiedData?.data?.photoUrl} />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

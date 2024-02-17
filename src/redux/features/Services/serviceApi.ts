@@ -32,4 +32,4 @@ const serviceApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useVerifyProductQuery } = serviceApi;
+export const { useVerifyProductQuery, useGetAllPolishServicesQuery, useRequestPolishMutation } = serviceApi;

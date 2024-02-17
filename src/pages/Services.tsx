@@ -1,5 +1,6 @@
 import { Button } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
+import { RequestPolish } from "../components/ui/PolishRequestModal";
 
 const Services = () => {
   return (
@@ -17,15 +18,13 @@ const Services = () => {
         </p>
         <p className="font-semibold text-blue-gray-700">Price: $10</p>
         <div className="flex justify-between">
-          <Button
-            placeholder={""}
-            variant="outlined"
-            className="hover:bg-black hover:text-white transition-all duration-300"
-          >
-            Request Service
-          </Button>
-          <NavLink to="/my-services" className="shadow-2xl">
-            <Button placeholder={""} variant="gradient">
+          <RequestPolish />
+          <NavLink to="/my-services">
+            <Button
+              placeholder={""}
+              variant="gradient"
+              className="rounded-none"
+            >
               My Requests
             </Button>
           </NavLink>

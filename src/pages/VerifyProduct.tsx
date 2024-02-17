@@ -1,23 +1,27 @@
-import { Input } from "@material-tailwind/react";
+import { Input, Spinner } from "@material-tailwind/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { useVerifyProductQuery } from "../redux/features/Services/serviceApi";
 import { useState } from "react";
 
-
 const VerifyProduct = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [uniqueId, setUniqueId] = useState("");
-  const { data: verifiedData, error } = useVerifyProductQuery(uniqueId, {
+  const {
+    data: verifiedData,
+    error,
+    isLoading,
+  } = useVerifyProductQuery(uniqueId, {
     skip: !uniqueId,
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setUniqueId(data.uniqueId);
+    reset();
   };
 
   return (
-    <div className="container mx-auto py-10 h-[60vh] flex flex-col items-center justify-center gap-20">
+    <div className="verifyProduct-container">
       <h1 className="text-center text-3xl font-black">Verify Your Product !</h1>
       <form className="w-3/6 flex" onSubmit={handleSubmit(onSubmit)}>
         <Input
@@ -43,13 +47,14 @@ const VerifyProduct = () => {
           {error?.data?.errorMessage} ❌
         </p>
       )}
+      {isLoading && <Spinner className="h-10 w-10" color="indigo" />}
       <div>
-        {verifiedData && (
+        {verifiedData && !error && (
           <div className="">
             <h1 className="text-green-800  text-2xl  bg-lime-50 px-14 py-3 text-center ">
               Your Product Is Authentic ✔
             </h1>
-            <div className="flex gap-20  items-center tracking-wide">
+            <div className="flex gap-60  items-center tracking-wide">
               <div className=" bg-blue-gray-50 p-7  space-y-3 ">
                 <p>
                   <span className="shoe-details">Product Name :</span>

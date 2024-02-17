@@ -51,3 +51,7 @@
 .shoe-details {
   @apply font-semibold font-serif text-lg text-blue-gray-700
 }
+
+.verifyProduct-container{
+  @apply container mx-auto py-10 h-[80vh] flex flex-col items-center justify-center gap-20
+}

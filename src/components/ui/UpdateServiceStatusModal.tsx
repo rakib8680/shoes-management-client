@@ -13,7 +13,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { toast } from "sonner";
-import { useUpdateServiceStatusMutation } from "../redux/features/Services/serviceApi";
+import { useUpdateServiceStatusMutation } from "../../redux/features/Services/serviceApi";
 
 export function UpdateServiceStatusModal({ id }: { id: string }) {
   const [open, setOpen] = React.useState(false);
@@ -22,16 +22,14 @@ export function UpdateServiceStatusModal({ id }: { id: string }) {
 
   //   submit polish request
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Updating...");
     const payload = {
       _id: id,
       data,
     };
 
-    const toastId = toast.loading("Updating...");
-
     try {
-      const res = await updateStatus(payload).unwrap();
-      console.log(res);
+      await updateStatus(payload);
       toast.success("Status Updated Successfully", {
         id: toastId,
         duration: 3000,
@@ -63,7 +61,7 @@ export function UpdateServiceStatusModal({ id }: { id: string }) {
       >
         <DialogHeader placeholder={""}>Update Service Status</DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className=" mx-10 space-y-10 ">
-          {/* level  */}
+          {/* status  */}
           <div className="">
             <Controller
               name="status"

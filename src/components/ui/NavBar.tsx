@@ -13,7 +13,7 @@ import {
   logOut,
   selectCurrentToken,
 } from "../../redux/features/auth/authSlice";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 import { verifyToken } from "../../utils/verifyToken";
 import { FaCube, FaScrewdriverWrench } from "react-icons/fa6";
 import { BsClipboardCheckFill } from "react-icons/bs";
@@ -30,7 +30,8 @@ const NavBar = () => {
   // logout
   const handleLogOut = () => {
     dispatch(logOut());
-    toast.error("LogOut successful", { duration: 2000 });
+    // toast.error("LogOut successful", { duration: 2000 });
+    window.location.reload();
   };
 
   // open close nav for mobile

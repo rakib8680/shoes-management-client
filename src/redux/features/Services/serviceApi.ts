@@ -32,9 +32,18 @@ const serviceApi = baseApi.injectEndpoints({
     updateServiceStatus: builder.mutation({
       query: (payload) => {
         return {
-          url: `services/update-polish/${payload._id}`,
+          url: `/services/update-polish/${payload._id}`,
           method: "PATCH",
           body: payload.data,
+        };
+      },
+      invalidatesTags: ["services"],
+    }),
+    deleteService: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/services/delete-service/${id}`,
+          method: "DELETE",
         };
       },
       invalidatesTags: ["services"],
@@ -47,4 +56,5 @@ export const {
   useGetAllPolishServicesQuery,
   useRequestPolishMutation,
   useUpdateServiceStatusMutation,
+  useDeleteServiceMutation,
 } = serviceApi;

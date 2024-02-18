@@ -1,9 +1,13 @@
 import { FaTrash } from "react-icons/fa6";
-import { useGetAllPolishServicesQuery } from "../redux/features/Services/serviceApi";
+import {
+  useDeleteServiceMutation,
+  useGetAllPolishServicesQuery,
+} from "../redux/features/Services/serviceApi";
 import { TUser, selectCurrentToken } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hook";
 import { verifyToken } from "../utils/verifyToken";
-import { UpdateServiceStatusModal } from "./UpdateServiceStatusModal";
+import { UpdateServiceStatusModal } from "../components/ui/UpdateServiceStatusModal";
+import Swal from "sweetalert2";
 
 type TService = {
   _id: string;
@@ -25,8 +29,33 @@ const MyServices = () => {
 
   // call api
   const { data } = useGetAllPolishServicesQuery(undefined);
+  const [deleteService] = useDeleteServiceMutation();
 
   const myServices = data?.data;
+
+  // delete service
+  const handleDelete = async (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#880E4F",
+      cancelButtonColor: "#48565E",
+      confirmButtonText: "Delete",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await deleteService(id).unwrap();
+        if (res.success) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Service has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="h-auto bg-gradient-to-b  from-blue-gray-100">
@@ -83,8 +112,12 @@ const MyServices = () => {
                 {user?.role === "seller" && <h2>{service.customerEmail}</h2>}
                 {user?.role === "seller" && (
                   <div className="flex justify-around">
-                   <UpdateServiceStatusModal id={service._id} />
-                    <button className=" text-red-300 " title="Delete Service">
+                    <UpdateServiceStatusModal id={service._id} />
+                    <button
+                      onClick={() => handleDelete(service._id)}
+                      className=" text-red-300 "
+                      title="Delete Service"
+                    >
                       <FaTrash size={19} />
                     </button>
                   </div>

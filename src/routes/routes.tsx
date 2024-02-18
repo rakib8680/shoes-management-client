@@ -8,6 +8,7 @@ import ProtectedRoute from "../components/layout/ProtectedRoute";
 import Services from "../pages/Services";
 import VerifyProduct from "../pages/VerifyProduct";
 import MyServices from "../pages/MyServices";
+import ReviewServices from "../pages/ReviewServices";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="buyer">
             <MyServices />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "review-services",
+        element: (
+          <ProtectedRoute role={undefined}>
+            <ReviewServices />
           </ProtectedRoute>
         ),
       },

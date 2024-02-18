@@ -82,6 +82,21 @@ const NavBar = () => {
                   </Button>
                 </NavLink>
               )}
+              {user?.role === "seller" && (
+                <NavLink to="/review-services">
+                  <Button
+                    placeholder={""}
+                    variant="gradient"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaScrewdriverWrench size={16} />
+                      Services
+                    </div>
+                  </Button>
+                </NavLink>
+              )}
               {user?.role === "buyer" && (
                 <NavLink to="services">
                   <Button
@@ -98,7 +113,7 @@ const NavBar = () => {
                 </NavLink>
               )}
               {user?.role === "buyer" && (
-                <NavLink to="verifyProduct">
+                <NavLink to="/verifyProduct">
                   <Button
                     placeholder={""}
                     variant="gradient"

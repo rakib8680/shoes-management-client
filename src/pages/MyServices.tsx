@@ -1,4 +1,4 @@
-import { FaTrash } from "react-icons/fa6";
+import { FaArrowLeftLong, FaTrash } from "react-icons/fa6";
 import {
   useDeleteServiceMutation,
   useGetAllPolishServicesQuery,
@@ -8,7 +8,8 @@ import { useAppSelector } from "../redux/hook";
 import { verifyToken } from "../utils/verifyToken";
 import { UpdateServiceStatusModal } from "../components/ui/UpdateServiceStatusModal";
 import Swal from "sweetalert2";
-import { Tooltip } from "@material-tailwind/react";
+import { Button, Tooltip } from "@material-tailwind/react";
+import { NavLink } from "react-router-dom";
 
 type TService = {
   _id: string;
@@ -67,6 +68,7 @@ const MyServices = () => {
             : "Review Services : "}
         </h1>
         <div className="myServices-table-container">
+          {/* Table Head  */}
           <div
             className={`myServices-table-head ${
               user?.role === "buyer" ? "grid-cols-5" : "grid-cols-6"
@@ -80,6 +82,7 @@ const MyServices = () => {
             {user?.role === "seller" && <h2>Customer</h2>}
             {user?.role === "seller" && <h2>Actions</h2>}
           </div>
+          {/* Table Body */}
           <div className="space-y-2">
             {myServices?.map((service: TService) => (
               <div
@@ -113,7 +116,9 @@ const MyServices = () => {
                 {user?.role === "seller" && <h2>{service.customerEmail}</h2>}
                 {user?.role === "seller" && (
                   <div className="flex justify-around">
+                    {/* Update Status */}
                     <UpdateServiceStatusModal id={service._id} />
+                    {/* Delete */}
                     <Tooltip content="Delete">
                       <button
                         onClick={() => handleDelete(service._id)}
@@ -129,6 +134,16 @@ const MyServices = () => {
             ))}
           </div>
         </div>
+        <NavLink to="/services">
+          <Button
+            placeholder={""}
+            variant="outlined"
+            className=" mt-7 flex items-center gap-2 square-btn"
+          >
+            <FaArrowLeftLong size={16} />
+            <span>Back</span>
+          </Button>
+        </NavLink>
       </div>
     </div>
   );

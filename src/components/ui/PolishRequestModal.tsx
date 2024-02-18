@@ -43,7 +43,7 @@ export function RequestPolish() {
       <Button
         placeholder={""}
         variant="outlined"
-        className="hover:bg-black hover:text-white transition-all duration-300 rounded-none"
+        className="square-btn"
         onClick={handleOpen}
       >
         Request Service

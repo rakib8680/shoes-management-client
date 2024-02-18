@@ -8,6 +8,7 @@ import { useAppSelector } from "../redux/hook";
 import { verifyToken } from "../utils/verifyToken";
 import { UpdateServiceStatusModal } from "../components/ui/UpdateServiceStatusModal";
 import Swal from "sweetalert2";
+import { Tooltip } from "@material-tailwind/react";
 
 type TService = {
   _id: string;
@@ -113,13 +114,15 @@ const MyServices = () => {
                 {user?.role === "seller" && (
                   <div className="flex justify-around">
                     <UpdateServiceStatusModal id={service._id} />
-                    <button
-                      onClick={() => handleDelete(service._id)}
-                      className=" text-red-300 "
-                      title="Delete Service"
-                    >
-                      <FaTrash size={19} />
-                    </button>
+                    <Tooltip content="Delete">
+                      <button
+                        onClick={() => handleDelete(service._id)}
+                        className=" text-red-300 "
+                        title="Delete Service"
+                      >
+                        <FaTrash size={19} />
+                      </button>
+                    </Tooltip>
                   </div>
                 )}
               </div>

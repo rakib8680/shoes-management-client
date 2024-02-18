@@ -1,6 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
-const serviceApi = baseApi.injectEndpoints({
+ const serviceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     verifyProduct: builder.query({
       query: (uniqueId) => {

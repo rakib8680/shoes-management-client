@@ -22,7 +22,7 @@ export function RequestPolish() {
   const { register, handleSubmit, reset, control } = useForm();
   const [requestPolish] = useRequestPolishMutation();
 
-//   submit polish request 
+  //   submit polish request
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Submitting...");
 
@@ -52,11 +52,11 @@ export function RequestPolish() {
         placeholder={""}
         open={open}
         handler={handleOpen}
-        className="p-10 space-y-10"
+        className="p-10 space-y-10 bg-gradient-to-b from-blue-gray-100 rounded-md"
         size="sm"
       >
         <DialogHeader placeholder={""}>Make A Polishing Request !</DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className=" mx-10 space-y-7">
+        <form onSubmit={handleSubmit(onSubmit)} className=" mx-10 space-y-7 ">
           {/* name  */}
           <Input
             crossOrigin={""}
@@ -114,7 +114,7 @@ export function RequestPolish() {
           {/* instructions */}
           <Textarea label="Instructions" {...register("instructions")} />
 
-          <div className="pt- flex justify-around">
+          <div className=" flex justify-around">
             <Button
               placeholder={""}
               variant="text"
@@ -127,8 +127,9 @@ export function RequestPolish() {
             <Button
               placeholder={""}
               variant="gradient"
-              color="green"
+              color="blue-gray"
               type="submit"
+              className="rounded-md"
             >
               <span>Confirm</span>
             </Button>

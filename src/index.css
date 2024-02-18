@@ -55,3 +55,14 @@
 .verifyProduct-container{
   @apply container mx-auto py-10 h-[80vh] flex flex-col items-center justify-center gap-20
 }
+
+.myServices-table-container{
+  @apply flex flex-col justify-between bg-blue-gray-100 py-7 px-5  text-center rounded-md space-y-3 border border-blue-gray-200
+}
+
+.myServices-table-head{
+  @apply grid grid-flow-col  grid-cols-5 bg-blue-gray-400 font-bold text-blue-gray-900  py-3 rounded-md shadow-md
+}
+.myServices-table-row{
+  @apply grid grid-flow-col grid-cols-5 bg-blue-gray-50 rounded-md py-2 shadow-sm border border-blue-gray-200
+}

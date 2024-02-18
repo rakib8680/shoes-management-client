@@ -187,7 +187,7 @@ const NavBar = () => {
                 fullWidth
                 variant="gradient"
                 size="sm"
-                className="px-6"
+                className="px-6 h-9"
               >
                 <div className="flex items-center gap-2">
                   <FaCube size={16} />
@@ -197,8 +197,30 @@ const NavBar = () => {
             </NavLink>
             {user?.role === "seller" && (
               <NavLink to="salesHistory">
-                <Button placeholder={""} fullWidth variant="outlined" size="sm">
+                <Button
+                  placeholder={""}
+                  fullWidth
+                  variant="outlined"
+                  size="sm"
+                  className="h-8 px-8"
+                >
                   Sales History
+                </Button>
+              </NavLink>
+            )}
+            {user?.role === "seller" && (
+              <NavLink to="/review-services">
+                <Button
+                  placeholder={""}
+                  fullWidth
+                  variant="gradient"
+                  size="sm"
+                  className="h-8 px-10"
+                >
+                  <div className="flex items-center gap-2">
+                    <FaScrewdriverWrench size={16} />
+                    Services
+                  </div>
                 </Button>
               </NavLink>
             )}

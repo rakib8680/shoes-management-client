@@ -1,6 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
- const serviceApi = baseApi.injectEndpoints({
+const serviceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     verifyProduct: builder.query({
       query: (uniqueId) => {
@@ -29,7 +29,22 @@ import { baseApi } from "../../api/baseApi";
       },
       invalidatesTags: ["services"],
     }),
+    updateServiceStatus: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `services/update-polish/${payload._id}`,
+          method: "PATCH",
+          body: payload.data,
+        };
+      },
+      invalidatesTags: ["services"],
+    }),
   }),
 });
 
-export const { useVerifyProductQuery, useGetAllPolishServicesQuery, useRequestPolishMutation } = serviceApi;
+export const {
+  useVerifyProductQuery,
+  useGetAllPolishServicesQuery,
+  useRequestPolishMutation,
+  useUpdateServiceStatusMutation,
+} = serviceApi;

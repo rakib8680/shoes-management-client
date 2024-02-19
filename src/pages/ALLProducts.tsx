@@ -43,7 +43,7 @@ const ALLProducts = () => {
     user = verifyToken(token) as TUser;
   }
 
-  const { data } = useGetAllProductsQuery({
+  const { data, error, isLoading } = useGetAllProductsQuery({
     brand: brand,
     color: color,
     model: model,
@@ -206,13 +206,24 @@ const ALLProducts = () => {
         </div>
       </div>
 
-      <div className="container mx-auto mb-40">
-        {user?.role === "seller" ? (
-          <AllProductsTable products={products} />
-        ) : (
-          <AllProductsCards products={products} />
-        )}
-      </div>
+      {!error ? (
+        <div className="container mx-auto mb-40">
+          {user?.role === "seller" ? (
+            <AllProductsTable products={products} />
+          ) : (
+            <AllProductsCards products={products} />
+          )}
+        </div>
+      ) : (
+        <p className="text-center text-2xl pt-20 text-blue-gray-600">
+          {error?.data?.errorMessage} ✖
+        </p>
+      )}
+      {isLoading && (
+        <p className="text-center text-2xl  text-blue-gray-600">
+          Loading... ⏳
+        </p>
+      )}
     </div>
   );
 };

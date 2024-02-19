@@ -22,9 +22,7 @@ const AllProductsTable = ({ products }: { products: TProducts }) => {
       placeholder={""}
       className="h-full w-full overflow-x-auto px-5 md:p-0"
     >
-
       <table className="w-full min-w-max table-auto text-left">
-
         {/* Table head  */}
         <thead>
           <tr>
@@ -45,14 +43,13 @@ const AllProductsTable = ({ products }: { products: TProducts }) => {
             ))}
           </tr>
         </thead>
-            
+
         {/* table body  */}
         <tbody>
           {products?.map((product, index) => (
             <AllProductsRow product={product} key={index}></AllProductsRow>
           ))}
         </tbody>
-        
       </table>
     </Card>
   );

@@ -8,7 +8,7 @@ import {
 import UpdateShoeModal from "./UpdateShoeModal";
 import SellShoeModal from "./SellShoeModal";
 import Swal from "sweetalert2";
-import { BsClipboardCheckFill, BsFillShieldSlashFill } from "react-icons/bs";
+import { BsFillShieldSlashFill } from "react-icons/bs";
 import { IoShieldCheckmark } from "react-icons/io5";
 
 const AllProductsRow = ({ product }: { product: TProduct }) => {

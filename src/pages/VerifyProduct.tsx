@@ -11,15 +11,24 @@ const VerifyProduct = () => {
     data: verifiedData,
     error,
     isLoading,
+    isFetching,
   } = useVerifyProductQuery(uniqueId, {
     skip: !uniqueId,
   });
 
-  // verify Product 
+  console.log(isFetching, isLoading);
+  // verify Product
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setUniqueId(data.uniqueId);
     reset();
   };
+
+  if (isFetching && !isLoading)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Spinner color="indigo" className="h-10 w-10" />;
+      </div>
+    );
 
   return (
     <div className="verifyProduct-container">
@@ -46,12 +55,13 @@ const VerifyProduct = () => {
         </button>
       </form>
 
+      {isLoading && <Spinner className="h-10 w-10" color="indigo" />}
+
       {error && (
         <p className="text-red-800 text-center text-lg lg:text-2xl  bg-pink-50 px-14 py-3">
           {error?.data?.errorMessage} ❌
         </p>
       )}
-      {isLoading && <Spinner className="h-10 w-10" color="indigo" />}
       <div>
         {verifiedData && !error && (
           <div className="">

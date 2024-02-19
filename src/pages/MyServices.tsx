@@ -61,7 +61,7 @@ const MyServices = () => {
 
   return (
     <div className="h-auto bg-gradient-to-b  from-blue-gray-100">
-      <div className="container mx-auto  pt-16 ">
+      <div className="container mx-auto  pt-16 px-2 md:px-0">
         <h1 className="font-semibold text-3xl py-5 text-blue-gray-700">
           {user?.role === "buyer"
             ? "My Polishing Requests :"
@@ -71,24 +71,27 @@ const MyServices = () => {
           {/* Table Head  */}
           <div
             className={`myServices-table-head ${
-              user?.role === "buyer" ? "grid-cols-5" : "grid-cols-6"
+              user?.role === "buyer" ? "grid-cols-5" : "Table-res"
             }`}
           >
             <h2>Product Name</h2>
             <h2>Status</h2>
-            <h2>Level Of Shine</h2>
-            <h2>Polishing Type</h2>
+            <h2 className="hidden lg:block">Level Of Shine</h2>
+            <h2 className="hidden md:block">Polishing Type</h2>
             {user?.role === "buyer" && <h2>Service ID</h2>}
-            {user?.role === "seller" && <h2>Customer</h2>}
+            {user?.role === "seller" && (
+              <h2 className="hidden xl:block">Customer</h2>
+            )}
             {user?.role === "seller" && <h2>Actions</h2>}
           </div>
+
           {/* Table Body */}
           <div className="space-y-2">
             {myServices?.map((service: TService) => (
               <div
                 key={service.serviceId}
                 className={`myServices-table-row ${
-                  user?.role === "buyer" ? "grid-cols-5" : "grid-cols-6"
+                  user?.role === "buyer" ? "grid-cols-5" : "Table-res"
                 }`}
               >
                 <h2>{service.productName}</h2>
@@ -106,16 +109,18 @@ const MyServices = () => {
                     service.status === "completed" &&
                     "bg-green-200 text-blue-gray-800"
                   } 
-                  font-semibold rounded-full px-2  w-fit mx-auto text-sm`}
+                  md:font-semibold rounded-full px-2  w-fit mx-auto text-sm`}
                 >
                   {service.status}
                 </h2>
-                <p>{service.level}</p>
-                <p>{service.type}</p>
+                <p className="hidden lg:block">{service.level}</p>
+                <p className="hidden md:block">{service.type}</p>
                 {user?.role === "buyer" && <h2>{service.serviceId}</h2>}
-                {user?.role === "seller" && <h2>{service.customerEmail}</h2>}
                 {user?.role === "seller" && (
-                  <div className="flex justify-around">
+                  <h2 className="hidden xl:block">{service.customerEmail}</h2>
+                )}
+                {user?.role === "seller" && (
+                  <div className="flex justify-center gap-7">
                     {/* Update Status */}
                     <UpdateServiceStatusModal id={service._id} />
                     {/* Delete */}
@@ -125,7 +130,7 @@ const MyServices = () => {
                         className=" text-red-300 "
                         title="Delete Service"
                       >
-                        <FaTrash size={19} />
+                        <FaTrash className="size-4 md:size-5" />
                       </button>
                     </Tooltip>
                   </div>
@@ -139,7 +144,7 @@ const MyServices = () => {
             <Button
               placeholder={""}
               variant="outlined"
-              className=" mt-7 flex items-center gap-2 square-btn"
+              className="mt-7 flex items-center gap-2 square-btn"
             >
               <FaArrowLeftLong size={16} />
               <span>Back</span>

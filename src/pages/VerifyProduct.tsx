@@ -15,6 +15,7 @@ const VerifyProduct = () => {
     skip: !uniqueId,
   });
 
+  // verify Product 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setUniqueId(data.uniqueId);
     reset();
@@ -23,7 +24,10 @@ const VerifyProduct = () => {
   return (
     <div className="verifyProduct-container">
       <h1 className="text-center text-3xl font-black">Verify Your Product !</h1>
-      <form className="w-3/6 flex" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className=" md:w-4/6 lg:w-3/6 flex"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           crossOrigin={""}
           className="!text-xl !text-blue-gray-900"
@@ -43,7 +47,7 @@ const VerifyProduct = () => {
       </form>
 
       {error && (
-        <p className="text-red-800 text-center text-2xl  bg-pink-50 px-14 py-3">
+        <p className="text-red-800 text-center text-lg lg:text-2xl  bg-pink-50 px-14 py-3">
           {error?.data?.errorMessage} ❌
         </p>
       )}
@@ -51,10 +55,10 @@ const VerifyProduct = () => {
       <div>
         {verifiedData && !error && (
           <div className="">
-            <h1 className="text-green-800  text-2xl  bg-lime-50 px-14 py-3 text-center ">
+            <h1 className="text-green-800 text-lg lg:text-2xl bg-lime-50 px-14 py-3 text-center">
               Your Product Is Authentic ✔
             </h1>
-            <div className="flex gap-60  items-center tracking-wide">
+            <div className="flex flex-col-reverse gap-6 md:flex-row lg:gap-60 items-center tracking-wide">
               <div className=" bg-blue-gray-50 p-7  space-y-3 ">
                 <p>
                   <span className="shoe-details">Product Name :</span>

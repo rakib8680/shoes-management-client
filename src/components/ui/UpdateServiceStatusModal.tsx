@@ -5,6 +5,7 @@ import {
   DialogHeader,
   Option,
   Select,
+  Tooltip,
 } from "@material-tailwind/react";
 import {
   Controller,
@@ -45,22 +46,32 @@ export function UpdateServiceStatusModal({ id }: { id: string }) {
 
   return (
     <>
-      <button
-        onClick={handleOpen}
-        className="bg-blue-gray-500 px-2 text-xs font-semibold text-blue-gray-50 rounded-md"
-      >
-        Update Status
-      </button>
+      <Tooltip content="Update Status">
+        <button
+          onClick={handleOpen}
+          className="bg-blue-gray-500 px-2 text-xs font-semibold text-blue-gray-50 rounded-md"
+        >
+          Update
+        </button>
+      </Tooltip>
 
       <Dialog
         placeholder={""}
         open={open}
         handler={handleOpen}
-        className="p-10 space-y-5 bg-gradient-to-b from-blue-gray-100 rounded-md"
+        className="pb-7 pt-4 lg:p-10 space-y-5 bg-gradient-to-b from-blue-gray-100 rounded-md"
         size="xs"
       >
-        <DialogHeader placeholder={""}>Update Service Status</DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className=" mx-10 space-y-10 ">
+        <DialogHeader
+          placeholder={""}
+          className="text-lg ps-10 lg:ps-0 lg:text-2xl"
+        >
+          Update Service Status
+        </DialogHeader>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mx-10 lg:mx-0 space-y-10 "
+        >
           {/* status  */}
           <div className="">
             <Controller

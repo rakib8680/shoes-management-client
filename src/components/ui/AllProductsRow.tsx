@@ -89,7 +89,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
     <tr key={photoUrl} className="text-center">
       {/* photo  */}
       <td className={classes}>
-        <img src={photoUrl} className="w-16" />
+        <img src={photoUrl} className="w-20" />
       </td>
 
       {/* name  */}

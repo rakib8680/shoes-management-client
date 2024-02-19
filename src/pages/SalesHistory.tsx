@@ -74,14 +74,13 @@ const SalesHistory = () => {
     }
   };
 
-
   return (
-    <div className="container mx-auto pb-28">
+    <div className="container mx-auto pb-28 px-4 md:px-0">
       <h1 className="text-center py-10 text-2xl text-blue-gray-500 font-extrabold">
         All Sales History
       </h1>
       {/* filter */}
-      <div className="flex justify-end pr-2 md:p-2">
+      <div className="flex justify-end pb-2">
         <select
           onChange={(event) => handleFilterChange(event.target.value)}
           className="filterSalesHistory "
@@ -92,10 +91,7 @@ const SalesHistory = () => {
           <option value="monthly">Monthly</option>
         </select>
       </div>
-      <Card
-        placeholder={""}
-        className="h-full w-full overflow-x-auto p-5 md:p-0"
-      >
+      <Card placeholder={""} className="h-full w-full overflow-x-auto md:mx-0">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -118,9 +114,10 @@ const SalesHistory = () => {
           </thead>
 
           <tbody>
-            {filteredSales && filteredSales?.map((item, index) => (
-              <SalesHistoryRow item={item} key={index} />
-            ))}
+            {filteredSales &&
+              filteredSales?.map((item, index) => (
+                <SalesHistoryRow item={item} key={index} />
+              ))}
           </tbody>
         </table>
       </Card>

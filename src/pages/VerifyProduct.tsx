@@ -16,7 +16,6 @@ const VerifyProduct = () => {
     skip: !uniqueId,
   });
 
-  console.log(isFetching, isLoading);
   // verify Product
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setUniqueId(data.uniqueId);
@@ -26,7 +25,7 @@ const VerifyProduct = () => {
   if (isFetching && !isLoading)
     return (
       <div className="h-screen flex items-center justify-center">
-        <Spinner color="indigo" className="h-10 w-10" />;
+        <Spinner color="indigo" className="h-10 w-10" />
       </div>
     );
 
@@ -55,21 +54,22 @@ const VerifyProduct = () => {
         </button>
       </form>
 
-      {isLoading && <Spinner className="h-10 w-10" color="indigo" />}
+      {isLoading && <Spinner className="h-10 w-10" color="indigo"/>}
 
-      {error && (
+      {error && "data" in error && (
         <p className="text-red-800 text-center text-lg lg:text-2xl  bg-pink-50 px-14 py-3">
-          {error?.data?.errorMessage} ❌
+          {(error.data as { errorMessage: string }).errorMessage} ❌
         </p>
       )}
+
       <div>
         {verifiedData && !error && (
           <div className="">
-            <h1 className="text-green-800 text-lg lg:text-2xl bg-lime-50 px-14 py-3 text-center">
+            <h1 className="text-green-800 text-lg lg:text-2xl bg-lime-50 px-14 py-3 text-center md:*:rounded-2xl mb-2">
               Your Product Is Authentic ✔
             </h1>
-            <div className="flex flex-col-reverse gap-6 md:flex-row lg:gap-60 items-center tracking-wide">
-              <div className=" bg-blue-gray-50 p-7  space-y-3 ">
+            <div className="flex flex-col-reverse gap-6 md:flex-row lg:gap-60 items-center tracking-wide ">
+              <div className=" bg-blue-gray-50 p-7  space-y-3 rounded-2xl">
                 <p>
                   <span className="shoe-details">Product Name :</span>
                   {verifiedData?.data?.name}
@@ -99,8 +99,8 @@ const VerifyProduct = () => {
                   {verifiedData?.data?.style}
                 </p>
               </div>
-              <div className="">
-                <img className="w-96" src={verifiedData?.data?.photoUrl} />
+              <div className="px-5 md:px-0">
+                <img className="w-96 rounded-b-2xl " src={verifiedData?.data?.photoUrl} />
               </div>
             </div>
           </div>

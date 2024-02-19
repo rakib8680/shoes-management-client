@@ -17,8 +17,10 @@ import {
 import { useRequestPolishMutation } from "../../redux/features/Services/serviceApi";
 import { toast } from "sonner";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export function RequestPolish() {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const { register, handleSubmit, reset, control } = useForm();
   const [requestPolish] = useRequestPolishMutation();
@@ -30,6 +32,7 @@ export function RequestPolish() {
     try {
       await requestPolish(data).unwrap();
       toast.success("Submitted Successfully", { id: toastId, duration: 3000 });
+      navigate("/my-services");
       reset();
       setOpen(false);
     } catch (err) {

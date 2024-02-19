@@ -6,7 +6,7 @@ import { LiaTasksSolid } from "react-icons/lia";
 const Services = () => {
   return (
     <div className="container mx-auto md:h-[70vh] flex flex-col justify-center px-5 md:px-0 ">
-      <div className="space-y-5 bg-gradient-to-bl from-blue-gray-100 px-6 py-10 mt-20 md:px-16 md:py-24">
+      <div className="space-y-5 bg-gradient-to-bl from-blue-gray-100 px-6 py-10 mt-20 mb-20 md:mb-0 md:px-16 md:py-24">
         <h1 className="text-4xl font-extrabold">Polish Your Shoes</h1>
         <p className="md:tracking-wide md:text-lg text-blue-gray-800 md:leading-loose">
           Our shoe shining service is the best in the city. We use only the best{" "}

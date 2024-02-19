@@ -61,7 +61,7 @@ const MyServices = () => {
 
   return (
     <div className="h-auto bg-gradient-to-b  from-blue-gray-100">
-      <div className="container mx-auto pt-7 md:pt-16 px-2 md:px-0">
+      <div className="container mx-auto pt-7 pb-20 md:pt-16 px-2 md:px-0">
         <h1 className="font-semibold text-2xl md:text-3xl py-5 text-blue-gray-700">
           {user?.role === "buyer"
             ? "My Polishing Requests :"
@@ -124,7 +124,7 @@ const MyServices = () => {
                   <h2 className="hidden xl:block">{service.customerEmail}</h2>
                 )}
                 {user?.role === "seller" && (
-                  <div className="flex justify-center gap-7">
+                  <div className="flex justify-center gap-3 md:gap-7">
                     {/* Update Status */}
                     <UpdateServiceStatusModal id={service._id} />
                     {/* Delete */}

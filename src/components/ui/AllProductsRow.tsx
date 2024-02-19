@@ -86,7 +86,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
   const classes = "p-4 border-b border-blue-gray-50";
 
   return (
-    <tr key={photoUrl} className="text-center">
+    <tr key={photoUrl} className="text-center ">
       {/* photo  */}
       <td className={classes}>
         <img src={photoUrl} className="w-20" />

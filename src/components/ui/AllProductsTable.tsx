@@ -20,9 +20,9 @@ const AllProductsTable = ({ products }: { products: TProducts }) => {
   return (
     <Card
       placeholder={""}
-      className="h-full w-full overflow-x-auto px-5 md:p-0"
+      className="h-full w-full overflow-x-auto"
     >
-      <table className="w-full min-w-max table-auto text-left">
+      <table className="w-full min-w-max table-auto text-left ">
         {/* Table head  */}
         <thead>
           <tr>

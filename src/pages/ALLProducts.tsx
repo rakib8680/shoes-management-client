@@ -208,7 +208,7 @@ const ALLProducts = () => {
       </div>
 
       {!error ? (
-        <div className="container mx-auto md:mb-40 mb-20">
+        <div className="container mx-auto md:mb-40 mb-20 px-4">
           {user?.role === "seller" ? (
             <AllProductsTable products={products} />
           ) : (
@@ -216,9 +216,11 @@ const ALLProducts = () => {
           )}
         </div>
       ) : (
-        <p className="text-center text-2xl py-20 text-blue-gray-600">
-          {error?.data?.errorMessage} ✖
-        </p>
+        "data" in error && (
+          <p className="text-center text-2xl py-20 text-blue-gray-600">
+            {(error.data as { errorMessage: string }).errorMessage} ✖
+          </p>
+        )
       )}
       {isFetching && (
         <p className="text-center pb-20 md:pb-0 text-lg md:text-2xl  text-blue-gray-600">

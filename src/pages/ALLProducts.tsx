@@ -43,6 +43,7 @@ const ALLProducts = () => {
     user = verifyToken(token) as TUser;
   }
 
+  // call api
   const { data, error, isLoading } = useGetAllProductsQuery({
     brand: brand,
     color: color,
@@ -58,7 +59,7 @@ const ALLProducts = () => {
   return (
     <div>
       <h1 className="total-products-text">
-        Total Products: {products?.length}
+        Total Products: {error ? 0 : products?.length}
       </h1>
       <div className="flex flex-col items-center md:items-center md:p-10">
         {user?.role === "seller" && <AddShoeModal />}

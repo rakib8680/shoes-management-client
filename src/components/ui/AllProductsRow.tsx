@@ -63,7 +63,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
     };
 
     Swal.fire({
-      title: "Authenticate This Product?",
+      title: `${isAuthentic ? "Deauthenticate" : "Authenticate"} this product?`,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#880E4F",
@@ -184,7 +184,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
           color="blue-gray"
           className="font-normal"
         >
-          {size.map((s) => s + ",")}
+          {size.join(", ")}
         </Typography>
       </td>
 

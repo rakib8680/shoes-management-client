@@ -1,13 +1,19 @@
 import { TProduct } from "../../pages/ALLProducts";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { useDeleteProductMutation } from "../../redux/features/products/productsApi";
+import {
+  useDeleteProductMutation,
+  useUpdateProductMutation,
+} from "../../redux/features/products/productsApi";
 import UpdateShoeModal from "./UpdateShoeModal";
 import SellShoeModal from "./SellShoeModal";
 import Swal from "sweetalert2";
+import { BsClipboardCheckFill, BsFillShieldSlashFill } from "react-icons/bs";
+import { IoShieldCheckmark } from "react-icons/io5";
 
 const AllProductsRow = ({ product }: { product: TProduct }) => {
   const [deleteProduct] = useDeleteProductMutation();
+  const [authenticateProduct] = useUpdateProductMutation();
   const {
     photoUrl,
     name,
@@ -19,6 +25,7 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
     style,
     size,
     _id,
+    isAuthentic,
     createdAt,
   } = product || {};
 
@@ -45,6 +52,37 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
       }
     });
   };
+
+  // authenticate product
+  const handleAuthenticate = async (_id: string) => {
+    const payload = {
+      id: _id,
+      updateInfo: {
+        isAuthentic: !isAuthentic,
+      },
+    };
+
+    Swal.fire({
+      title: "Authenticate This Product?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#880E4F",
+      cancelButtonColor: "#48565E",
+      confirmButtonText: "Update",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await authenticateProduct(payload).unwrap();
+        if (res.success) {
+          Swal.fire({
+            title: "Success!",
+            text: "Update has been made.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+
   const classes = "p-4 border-b border-blue-gray-50";
 
   return (
@@ -179,6 +217,25 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
 
         {/* sale  */}
         <SellShoeModal _id={_id} />
+
+        {/* Authenticate  */}
+        <Tooltip content={`${isAuthentic ? "Authentic" : "Not Authentic"}`}>
+          <Button
+            placeholder={""}
+            onClick={() => handleAuthenticate(_id)}
+            className={`${
+              isAuthentic
+                ? "bg-amber-200 text-amber-900"
+                : "bg-gray-200 text-gray-500"
+            } p-2 rounded-md  `}
+          >
+            {isAuthentic ? (
+              <IoShieldCheckmark size={20} />
+            ) : (
+              <BsFillShieldSlashFill size={18} />
+            )}
+          </Button>
+        </Tooltip>
       </td>
     </tr>
   );

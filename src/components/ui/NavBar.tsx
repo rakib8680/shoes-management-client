@@ -48,14 +48,17 @@ const NavBar = () => {
       <Navbar placeholder={""} className="navbar-container">
         {/* for desktop */}
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            placeholder={""}
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-bold text-xl"
-          >
-            Shoe Management
-          </Typography>
+          <div className=" items-center gap-2 ">
+            <Typography
+              placeholder={""}
+              as="a"
+              href="#"
+              className=" cursor-pointer  font-bold text-xl"
+            >
+              Shoe Management
+            </Typography>
+            {user?.role === "seller" && <p className="bg-blue-gray-600 rounded-full px-2 text-xs w-fit  text-blue-gray-100">seller</p>}
+          </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-x-10  ">
               <NavLink to="/allProducts">

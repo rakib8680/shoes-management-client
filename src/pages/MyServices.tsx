@@ -30,7 +30,7 @@ const MyServices = () => {
   }
 
   // call api
-  const { data } = useGetAllPolishServicesQuery(undefined);
+  const { data, isLoading } = useGetAllPolishServicesQuery(undefined);
   const [deleteService] = useDeleteServiceMutation();
 
   const myServices = data?.data;
@@ -61,8 +61,8 @@ const MyServices = () => {
 
   return (
     <div className="h-auto bg-gradient-to-b  from-blue-gray-100">
-      <div className="container mx-auto  pt-16 px-2 md:px-0">
-        <h1 className="font-semibold text-3xl py-5 text-blue-gray-700">
+      <div className="container mx-auto pt-7 md:pt-16 px-2 md:px-0">
+        <h1 className="font-semibold text-2xl md:text-3xl py-5 text-blue-gray-700">
           {user?.role === "buyer"
             ? "My Polishing Requests :"
             : "Review Services : "}
@@ -71,7 +71,9 @@ const MyServices = () => {
           {/* Table Head  */}
           <div
             className={`myServices-table-head ${
-              user?.role === "buyer" ? "grid-cols-5" : "Table-res"
+              user?.role === "buyer"
+                ? "grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+                : "Table-res"
             }`}
           >
             <h2>Product Name</h2>
@@ -91,7 +93,9 @@ const MyServices = () => {
               <div
                 key={service.serviceId}
                 className={`myServices-table-row ${
-                  user?.role === "buyer" ? "grid-cols-5" : "Table-res"
+                  user?.role === "buyer"
+                    ? " grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+                    : "Table-res"
                 }`}
               >
                 <h2>{service.productName}</h2>
@@ -138,11 +142,17 @@ const MyServices = () => {
               </div>
             ))}
           </div>
+          {isLoading && (
+            <p className="text-center py-10 text-lg md:text-2xl  text-blue-gray-600">
+              Loading... ⏳
+            </p>
+          )}
         </div>
         {user?.role === "buyer" && (
           <NavLink to="/services">
             <Button
               placeholder={""}
+              size="sm"
               variant="outlined"
               className="mt-7 flex items-center gap-2 square-btn"
             >

@@ -44,7 +44,7 @@ const ALLProducts = () => {
   }
 
   // call api
-  const { data, error, isLoading } = useGetAllProductsQuery({
+  const { data, error, isFetching } = useGetAllProductsQuery({
     brand: brand,
     color: color,
     model: model,
@@ -208,7 +208,7 @@ const ALLProducts = () => {
       </div>
 
       {!error ? (
-        <div className="container mx-auto mb-40">
+        <div className="container mx-auto md:mb-40 mb-20">
           {user?.role === "seller" ? (
             <AllProductsTable products={products} />
           ) : (
@@ -216,12 +216,12 @@ const ALLProducts = () => {
           )}
         </div>
       ) : (
-        <p className="text-center text-2xl pt-20 text-blue-gray-600">
+        <p className="text-center text-2xl py-20 text-blue-gray-600">
           {error?.data?.errorMessage} ✖
         </p>
       )}
-      {isLoading && (
-        <p className="text-center text-2xl  text-blue-gray-600">
+      {isFetching && (
+        <p className="text-center pb-20 md:pb-0 text-lg md:text-2xl  text-blue-gray-600">
           Loading... ⏳
         </p>
       )}

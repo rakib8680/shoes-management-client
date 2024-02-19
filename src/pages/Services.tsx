@@ -5,10 +5,10 @@ import { LiaTasksSolid } from "react-icons/lia";
 
 const Services = () => {
   return (
-    <div className="container mx-auto h-[70vh] flex flex-col justify-center ">
-      <div className="space-y-5 bg-gradient-to-bl from-blue-gray-100 px-16 py-24">
+    <div className="container mx-auto md:h-[70vh] flex flex-col justify-center px-5 md:px-0 ">
+      <div className="space-y-5 bg-gradient-to-bl from-blue-gray-100 px-6 py-10 mt-20 md:px-16 md:py-24">
         <h1 className="text-4xl font-extrabold">Polish Your Shoes</h1>
-        <p className="tracking-wide text-lg text-blue-gray-800 leading-loose">
+        <p className="md:tracking-wide md:text-lg text-blue-gray-800 md:leading-loose">
           Our shoe shining service is the best in the city. We use only the best{" "}
           <br />
           products to make your shoes look like new. We guarantee you will be{" "}
@@ -18,13 +18,13 @@ const Services = () => {
           We also offer a discount for regular customers.
         </p>
         <p className="font-semibold text-blue-gray-700">Price: $10</p>
-        <div className="flex justify-between">
+        <div className="md:flex justify-between items-center">
           <RequestPolish />
-          <NavLink to="/my-services">
+          <NavLink to="/my-services" className="">
             <Button
               placeholder={""}
               variant="gradient"
-              className="rounded-none flex gap-2"
+              className="rounded-none mt-4 md:mt-0 flex gap-2 "
             >
               <LiaTasksSolid size={15} />
               My Requests

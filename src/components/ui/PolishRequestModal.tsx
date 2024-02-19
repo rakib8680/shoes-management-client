@@ -54,11 +54,16 @@ export function RequestPolish() {
         placeholder={""}
         open={open}
         handler={handleOpen}
-        className="p-10 space-y-10 bg-gradient-to-b from-blue-gray-100 rounded-md"
+        className=" pt-6 pb-10 md:p-10 space-y-10 bg-gradient-to-b from-blue-gray-100 rounded-md "
         size="sm"
       >
-        <DialogHeader placeholder={""}>Make A Polishing Request !</DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className=" mx-10 space-y-7 ">
+        <DialogHeader placeholder={""} className="ps-10 md:ps-0">
+          Make A Polishing Request !
+        </DialogHeader>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className=" !mt-4 md:pt-5  mx-8 space-y-5 md:mx-10 md:space-y-7 "
+        >
           {/* name  */}
           <Input
             crossOrigin={""}

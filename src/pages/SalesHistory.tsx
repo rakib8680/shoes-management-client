@@ -21,10 +21,10 @@ export type TSalesHistory = {
 export type TSalesHistories = TSalesHistory[];
 
 const SalesHistory = () => {
-  const { data } = useGetSalesHistoryQuery(undefined);
+  const { data, isLoading } = useGetSalesHistoryQuery(undefined);
   const allSales: TSalesHistories = data?.data;
   const [filteredSales, setFilteredSales] = useState<TSalesHistories>([]);
-  
+
   useEffect(() => {
     if (allSales) {
       setFilteredSales(allSales);
@@ -74,11 +74,13 @@ const SalesHistory = () => {
     }
   };
 
+
   return (
     <div className="container mx-auto pb-28">
       <h1 className="text-center py-10 text-2xl text-blue-gray-500 font-extrabold">
         All Sales History
       </h1>
+      {/* filter */}
       <div className="flex justify-end pr-2 md:p-2">
         <select
           onChange={(event) => handleFilterChange(event.target.value)}
@@ -116,12 +118,22 @@ const SalesHistory = () => {
           </thead>
 
           <tbody>
-            {filteredSales?.map((item, index) => (
+            {filteredSales && filteredSales?.map((item, index) => (
               <SalesHistoryRow item={item} key={index} />
             ))}
           </tbody>
         </table>
       </Card>
+      {!isLoading && !filteredSales.length && (
+        <p className="text-center text-2xl mt-40  text-blue-gray-600">
+          No Data Found! 📉
+        </p>
+      )}
+      {isLoading && (
+        <p className="text-center text-2xl mt-40  text-blue-gray-600">
+          Loading... ⏳
+        </p>
+      )}
     </div>
   );
 };

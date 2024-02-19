@@ -71,6 +71,6 @@
   @apply hover:bg-black hover:text-white transition-all duration-300 rounded-none;
 }
 
-.Table-res{
-  @apply grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6
+.Table-res {
+  @apply grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6;
 }

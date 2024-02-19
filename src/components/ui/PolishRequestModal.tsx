@@ -16,6 +16,7 @@ import {
 } from "react-hook-form";
 import { useRequestPolishMutation } from "../../redux/features/Services/serviceApi";
 import { toast } from "sonner";
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 export function RequestPolish() {
   const [open, setOpen] = React.useState(false);
@@ -43,10 +44,11 @@ export function RequestPolish() {
       <Button
         placeholder={""}
         variant="outlined"
-        className="square-btn"
+        className="square-btn flex gap-2 items-center"
         onClick={handleOpen}
       >
         Request Service
+        <IoCloudUploadOutline size={20} />
       </Button>
       <Dialog
         placeholder={""}

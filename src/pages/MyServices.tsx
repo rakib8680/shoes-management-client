@@ -134,16 +134,18 @@ const MyServices = () => {
             ))}
           </div>
         </div>
-        <NavLink to="/services">
-          <Button
-            placeholder={""}
-            variant="outlined"
-            className=" mt-7 flex items-center gap-2 square-btn"
-          >
-            <FaArrowLeftLong size={16} />
-            <span>Back</span>
-          </Button>
-        </NavLink>
+        {user?.role === "buyer" && (
+          <NavLink to="/services">
+            <Button
+              placeholder={""}
+              variant="outlined"
+              className=" mt-7 flex items-center gap-2 square-btn"
+            >
+              <FaArrowLeftLong size={16} />
+              <span>Back</span>
+            </Button>
+          </NavLink>
+        )}
       </div>
     </div>
   );

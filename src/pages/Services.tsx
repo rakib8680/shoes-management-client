@@ -1,6 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
 import { RequestPolish } from "../components/ui/PolishRequestModal";
+import { LiaTasksSolid } from "react-icons/lia";
 
 const Services = () => {
   return (
@@ -23,8 +24,9 @@ const Services = () => {
             <Button
               placeholder={""}
               variant="gradient"
-              className="rounded-none"
+              className="rounded-none flex gap-2"
             >
+              <LiaTasksSolid size={15} />
               My Requests
             </Button>
           </NavLink>

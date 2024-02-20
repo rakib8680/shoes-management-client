@@ -1,5 +1,10 @@
 import { TProduct } from "../../pages/ALLProducts";
-import { Button, Tooltip, Typography } from "@material-tailwind/react";
+import {
+  Button,
+  Checkbox,
+  Tooltip,
+  Typography,
+} from "@material-tailwind/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import {
   useDeleteProductMutation,
@@ -11,7 +16,12 @@ import Swal from "sweetalert2";
 import { BsFillShieldSlashFill } from "react-icons/bs";
 import { IoShieldCheckmark } from "react-icons/io5";
 
-const AllProductsRow = ({ product }: { product: TProduct }) => {
+type TProductsRowProps = {
+  product: TProduct;
+  setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+const AllProductsRow = ({ product, setSelectedIds }: TProductsRowProps) => {
   const [deleteProduct] = useDeleteProductMutation();
   const [authenticateProduct] = useUpdateProductMutation();
   const {
@@ -53,6 +63,17 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
     });
   };
 
+  // Make Array of _id to delete
+  const storeIds = (_id: string) => {
+    setSelectedIds((prevIds) => {
+      if (prevIds.includes(_id)) {
+        return prevIds.filter((id) => id !== _id);
+      } else {
+        return [...prevIds, _id];
+      }
+    });
+  };
+
   // authenticate product
   const handleAuthenticate = async (_id: string) => {
     const payload = {
@@ -88,7 +109,12 @@ const AllProductsRow = ({ product }: { product: TProduct }) => {
   return (
     <tr key={photoUrl} className="text-center ">
       {/* photo  */}
-      <td className={classes}>
+      <td className="p-4 border-b border-blue-gray-50 flex">
+        <Checkbox
+          crossOrigin={""}
+          className="!size-4"
+          onClick={() => storeIds(_id)}
+        />
         <img src={photoUrl} className="w-20" />
       </td>
 

@@ -5,6 +5,9 @@
 ## Project Description
 
 - This is a Shoe Management System where you can add, update, delete, sell shoes and also can see all the shoes and sales history.
+- You can also filter the shoes by brand, size, price, model, release date, color, style, and sizes.
+- You can also register and login to the system.
+- This Site has two kind of users: Seller and Buyer. Seller can add, update, delete shoes and they can also see the sales History and Buyer can only see all the shoes and They can make request for polishing their shoes.Also Buyers can customize their shoes by choosing the color and size of the shoes.
 - This is the client side of the project. You can find the server side of the project here: https://shoes-management-server-two.vercel.app
 
 ## How to Run Locally
@@ -40,6 +43,8 @@ And At-last Start the project by running the following command
 - Register Page
 - All Products Page
 - Sales History Page
+- Services Page
+- Verify Product Page
 
 ## Filtering Options
 
@@ -54,7 +59,7 @@ And At-last Start the project by running the following command
 
 ## Technologies Used:
 
-**Client**: React, Redux, RTK-Query, Tailwind CSS, React Hook Form, React Icons, React Router Dom, React Hook Form Multi Select, Sonner, React Range, Material Tailwind,
+**Client**: React, Redux, RTK-Query, Tailwind CSS, React Hook Form, React Icons, React Router Dom, React Hook Form Multi Select, Sonner, React Range, Material Tailwind, React Sweet Alert
 
 **Validation**: EsLint, Prettier
 
@@ -67,6 +72,7 @@ And At-last Start the project by running the following command
 - Create Shoes
 - Update Shoes
 - Delete Shoes
+- Bulk Delete Shoes
 - Get All Shoes
 - Get Single Shoe
 - Sell Shoes
@@ -74,6 +80,11 @@ And At-last Start the project by running the following command
 - Get Sales History
 - Register User
 - Login User
+- Polishing Request
+- Customize Shoes
+- Filter Shoes
+- Search Shoes
+- Sort Shoes
 
 ## API Reference
 
@@ -107,10 +118,34 @@ And At-last Start the project by running the following command
   DELETE /api/products/delete-shoe/:id
 ```
 
+#### Delete Multiple shoes
+
+```http
+  DELETE /api/products/delete-shoes
+```
+
 #### Sell shoes by id
 
 ```http
   PUT /api/products/sell-shoes/:id
+```
+
+#### Duplicate shoes by id
+
+```http
+  POST /api/products/duplicate-shoes/:id
+```
+
+#### Get Sales History
+
+```http
+  GET /api/products/sales-history
+```
+
+#### Verify Shoes by id
+
+```http
+  PUT /api/products/verify-product/:id
 ```
 
 #### Register User
@@ -123,6 +158,30 @@ And At-last Start the project by running the following command
 
 ```http
   POST /api/auth/login-user
+```
+
+#### Polishing Request
+
+```http
+  POST /api/products/polishing-request
+```
+
+#### Customize Shoes
+
+```http
+  POST /api/products/customize-shoes
+```
+
+#### Get All Polish Services Request
+
+```http
+  GET /api/products/polishing-request
+```
+
+#### Delete Polishing Request
+
+```http
+  DELETE /api/products/delete-polishing-request/:id
 ```
 
 ## Author

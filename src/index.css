@@ -74,3 +74,23 @@
 .Table-res {
   @apply grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6;
 }
+
+
+.services-container{
+  @apply space-y-5 px-6 py-10 mt-10 md:mt-20 md:mb-20 md:px-16 md:py-24
+}
+
+.services-paragraph{
+  @apply text-sm md:tracking-wide text-blue-gray-800 md:leading-loose text-justify
+}
+
+.custom-text{
+  @apply bg-clip-text text-transparent bg-gradient-to-r
+}
+
+.custom-service-cont{
+  @apply bg-gradient-to-br from-white via-amber-50 to-cyan-50 services-container mb-20
+}
+.custom-service-btn-cont{
+  @apply flex flex-col md:flex-row justify-between items-center gap-7 md:gap-0 md:relative top-10
+}

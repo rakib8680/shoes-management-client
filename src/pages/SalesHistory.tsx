@@ -24,7 +24,7 @@ const SalesHistory = () => {
   const { data } = useGetSalesHistoryQuery(undefined);
   const allSales: TSalesHistories = data?.data;
   const [filteredSales, setFilteredSales] = useState<TSalesHistories>([]);
-  
+
   useEffect(() => {
     if (allSales) {
       setFilteredSales(allSales);

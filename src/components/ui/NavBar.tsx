@@ -11,16 +11,14 @@ import { useAppDispatch } from "../../redux/hook";
 import { logOut } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 
-
-
 const NavBar = () => {
-
   const dispatch = useAppDispatch();
 
-  const handleLogOut= ()=>{
-    dispatch(logOut())
-    toast.error('LogOut successful', {duration:2000} )
-  }
+  //logout function
+  const handleLogOut = () => {
+    dispatch(logOut());
+    toast.error("LogOut successful", { duration: 2000 });
+  };
 
   const [openNav, setOpenNav] = React.useState(false);
 
@@ -37,6 +35,7 @@ const NavBar = () => {
         placeholder={""}
         className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-5 lg:pl-8 lg:pr-20 lg:py-6  bg-gradient-to-br from-blue-gray-200 to-blue-gray-50"
       >
+        {/*For desktop*/}
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             placeholder={""}
@@ -145,7 +144,7 @@ const NavBar = () => {
               </Button>
             </NavLink>
             <Button
-            onClick={handleLogOut}
+              onClick={handleLogOut}
               placeholder={""}
               variant="filled"
               size="sm"

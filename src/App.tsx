@@ -4,8 +4,8 @@ import NavBar from "./components/ui/NavBar";
 const App = () => {
   return (
     <div>
-     <NavBar/>
-     <Outlet/>
+      <NavBar />
+      <Outlet />
     </div>
   );
 };

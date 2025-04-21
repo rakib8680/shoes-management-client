@@ -5,12 +5,15 @@ import Login from "../pages/Login";
 import ALLProducts from "../pages/ALLProducts";
 import SalesHistory from "../pages/SalesHistory";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
+import Services from "../pages/Services";
+import VerifyProduct from "../pages/VerifyProduct";
+import MyServices from "../pages/MyServices";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute role={undefined}>
         <App />
       </ProtectedRoute>
     ),
@@ -21,7 +24,43 @@ const router = createBrowserRouter([
       },
       {
         path: "salesHistory",
-        element: <SalesHistory />,
+        element: (
+          <ProtectedRoute role="seller">
+            <SalesHistory />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "services",
+        element: (
+          <ProtectedRoute role="buyer">
+            <Services />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-services",
+        element: (
+          <ProtectedRoute role="buyer">
+            <MyServices />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "review-services",
+        element: (
+          <ProtectedRoute role={undefined}>
+            <MyServices />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "verifyProduct",
+        element: (
+          <ProtectedRoute role="buyer">
+            <VerifyProduct />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

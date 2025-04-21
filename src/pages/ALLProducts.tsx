@@ -3,6 +3,10 @@ import AddShoeModal from "../components/ui/AddShoeModal";
 import AllProductsTable from "../components/ui/AllProductsTable";
 import { useGetAllProductsQuery } from "../redux/features/products/productsApi";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hook";
+import { TUser, selectCurrentToken } from "../redux/features/auth/authSlice";
+import { verifyToken } from "../utils/verifyToken";
+import AllProductsCards from "./AllProductsCards";
 
 export type TProduct = {
   _id: string;
@@ -11,6 +15,8 @@ export type TProduct = {
   brand: string;
   color: string;
   model: string;
+  isAuthentic: boolean;
+  uniqueId: string;
   quantity: number;
   style: string;
   size: number[];
@@ -30,7 +36,15 @@ const ALLProducts = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
-  const { data } = useGetAllProductsQuery({
+  // get user role from token
+  const token = useAppSelector(selectCurrentToken);
+  let user;
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
+
+  // call api
+  const { data, error, isFetching } = useGetAllProductsQuery({
     brand: brand,
     color: color,
     model: model,
@@ -45,10 +59,10 @@ const ALLProducts = () => {
   return (
     <div>
       <h1 className="total-products-text">
-        Total Products: {products?.length}
+        Total Products: {error ? 0 : products?.length}
       </h1>
-      <div className="flex flex-col items-center md:items-center md:p-10  ">
-        <AddShoeModal />
+      <div className="flex flex-col items-center md:items-center md:p-10">
+        {user?.role === "seller" && <AddShoeModal />}
 
         <div className="filter-container">
           <h1 className="text-blue-gray-400 font-medium text-md md:pt-3 pb-2 md:pb-0">
@@ -173,6 +187,7 @@ const ALLProducts = () => {
               />
               <div className="text-center text-blue-gray-400">{minPrice}</div>
             </div>
+
             {/* filter by Max price */}
             <div className="w-full">
               <div className="text-center text-xs text-blue-gray-400">
@@ -192,9 +207,26 @@ const ALLProducts = () => {
         </div>
       </div>
 
-      <div className="container mx-auto mb-40">
-        <AllProductsTable products={products} />
-      </div>
+      {!error ? (
+        <div className="container mx-auto md:mb-40 mb-20 px-4">
+          {user?.role === "seller" ? (
+            <AllProductsTable products={products} />
+          ) : (
+            <AllProductsCards products={products} />
+          )}
+        </div>
+      ) : (
+        "data" in error && (
+          <p className="text-center text-2xl py-20 text-blue-gray-600">
+            {(error.data as { errorMessage: string }).errorMessage} ✖
+          </p>
+        )
+      )}
+      {isFetching && (
+        <p className="text-center pb-20 md:pb-0 text-lg md:text-2xl  text-blue-gray-600">
+          Loading... ⏳
+        </p>
+      )}
     </div>
   );
 };

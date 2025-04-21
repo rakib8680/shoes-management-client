@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
+
+
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://shoes-management-server-two.vercel.app/api",
   prepareHeaders: (headers, { getState }) => {
@@ -15,6 +17,6 @@ const baseQuery = fetchBaseQuery({
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery,
-  tagTypes:["products"],
+  tagTypes: ["products", "services"],
   endpoints: () => ({}),
 });

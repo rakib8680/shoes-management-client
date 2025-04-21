@@ -7,21 +7,35 @@ import {
   Collapse,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hook";
-import { logOut } from "../../redux/features/auth/authSlice";
-import { toast } from "sonner";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import {
+  TUser,
+  logOut,
+  selectCurrentToken,
+} from "../../redux/features/auth/authSlice";
+// import { toast } from "sonner";
+import { verifyToken } from "../../utils/verifyToken";
+import { FaCube, FaScrewdriverWrench } from "react-icons/fa6";
+import { BsClipboardCheckFill } from "react-icons/bs";
 
 const NavBar = () => {
+  // get user role from token
   const dispatch = useAppDispatch();
+  const token = useAppSelector(selectCurrentToken);
+  let user;
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
 
-  //logout function
+  // logout
   const handleLogOut = () => {
     dispatch(logOut());
-    toast.error("LogOut successful", { duration: 2000 });
+    // toast.error("LogOut successful", { duration: 2000 });
+    window.location.reload();
   };
 
+  // open close nav for mobile
   const [openNav, setOpenNav] = React.useState(false);
-
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -31,20 +45,20 @@ const NavBar = () => {
 
   return (
     <div className=" max-h-[768px] w-full">
-      <Navbar
-        placeholder={""}
-        className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-5 lg:pl-8 lg:pr-20 lg:py-6  bg-gradient-to-br from-blue-gray-200 to-blue-gray-50"
-      >
-        {/*For desktop*/}
+      <Navbar placeholder={""} className="navbar-container">
+        {/* for desktop */}
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            placeholder={""}
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-bold text-xl"
-          >
-            Shoe Management
-          </Typography>
+          <div className=" items-center gap-2 ">
+            <Typography
+              placeholder={""}
+              as="a"
+              href="#"
+              className=" cursor-pointer  font-bold text-xl"
+            >
+              Shoe Management
+            </Typography>
+            {user?.role === "seller" && <p className="bg-blue-gray-600 rounded-full px-2 text-xs w-fit  text-blue-gray-100">seller</p>}
+          </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-x-10  ">
               <NavLink to="/allProducts">
@@ -52,21 +66,71 @@ const NavBar = () => {
                   placeholder={""}
                   variant="gradient"
                   size="md"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block "
                 >
-                  All Products
+                  <div className="flex items-center gap-2">
+                    <FaCube size={16} />
+                    All Products
+                  </div>
                 </Button>
               </NavLink>
-              <NavLink to="salesHistory">
-                <Button
-                  placeholder={""}
-                  variant="outlined"
-                  size="md"
-                  className="hidden lg:inline-block"
-                >
-                  Sales History
-                </Button>
-              </NavLink>
+              {user?.role === "seller" && (
+                <NavLink to="salesHistory">
+                  <Button
+                    placeholder={""}
+                    variant="outlined"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    Sales History
+                  </Button>
+                </NavLink>
+              )}
+              {user?.role === "seller" && (
+                <NavLink to="/review-services">
+                  <Button
+                    placeholder={""}
+                    variant="gradient"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaScrewdriverWrench size={16} />
+                      Services
+                    </div>
+                  </Button>
+                </NavLink>
+              )}
+              {user?.role === "buyer" && (
+                <NavLink to="services">
+                  <Button
+                    placeholder={""}
+                    variant="outlined"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaScrewdriverWrench size={16} />
+                      Services
+                    </div>
+                  </Button>
+                </NavLink>
+              )}
+              {user?.role === "buyer" && (
+                <NavLink to="/verifyProduct">
+                  <Button
+                    placeholder={""}
+                    variant="gradient"
+                    size="md"
+                    className="hidden lg:inline-block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <BsClipboardCheckFill size={16} />
+                      Verify Product
+                    </div>
+                  </Button>
+                </NavLink>
+              )}
             </div>
             <IconButton
               placeholder={""}
@@ -127,22 +191,68 @@ const NavBar = () => {
                 fullWidth
                 variant="gradient"
                 size="sm"
-                className=""
+                className="px-6 h-9"
               >
-                All Products
+                <div className="flex items-center gap-2">
+                  <FaCube size={16} />
+                  All Products
+                </div>
               </Button>
             </NavLink>
-            <NavLink to="salesHistory">
-              <Button
-                placeholder={""}
-                fullWidth
-                variant="outlined"
-                size="sm"
-                className=""
-              >
-                Sales History
-              </Button>
-            </NavLink>
+            {user?.role === "seller" && (
+              <NavLink to="salesHistory">
+                <Button
+                  placeholder={""}
+                  fullWidth
+                  variant="outlined"
+                  size="sm"
+                  className="h-8 px-8"
+                >
+                  Sales History
+                </Button>
+              </NavLink>
+            )}
+            {user?.role === "seller" && (
+              <NavLink to="/review-services">
+                <Button
+                  placeholder={""}
+                  fullWidth
+                  variant="gradient"
+                  size="sm"
+                  className="h-8 px-10"
+                >
+                  <div className="flex items-center gap-2">
+                    <FaScrewdriverWrench size={16} />
+                    Services
+                  </div>
+                </Button>
+              </NavLink>
+            )}
+            {user?.role === "buyer" && (
+              <NavLink to="services">
+                <Button
+                  placeholder={""}
+                  variant="outlined"
+                  size="sm"
+                  className="h-8 px-10"
+                >
+                  <div className="flex items-center gap-2">
+                    <FaScrewdriverWrench size={16} />
+                    Services
+                  </div>
+                </Button>
+              </NavLink>
+            )}
+            {user?.role === "buyer" && (
+              <NavLink to="verifyProduct">
+                <Button placeholder={""} variant="gradient" size="sm">
+                  <div className="flex items-center gap-2">
+                    <BsClipboardCheckFill size={16} />
+                    Verify Product
+                  </div>
+                </Button>
+              </NavLink>
+            )}
             <Button
               onClick={handleLogOut}
               placeholder={""}

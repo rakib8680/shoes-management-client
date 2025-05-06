@@ -57,7 +57,11 @@ const NavBar = () => {
             >
               Shoe Management
             </Typography>
-            {user?.role === "seller" && <p className="bg-blue-gray-600 rounded-full px-2 text-xs w-fit  text-blue-gray-100">seller</p>}
+            {user?.role === "seller" && (
+              <p className="bg-blue-gray-600 rounded-full px-2 text-xs w-fit  text-blue-gray-100">
+                seller
+              </p>
+            )}
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-x-10  ">

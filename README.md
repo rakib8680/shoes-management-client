@@ -18,6 +18,14 @@ The platform caters to two distinct user types:
 
 This repository houses the client-side code of the project. For the server-side code, visit: [Shoe Management Server](https://github.com/rakib8680/shoes-management-server)
 
+
+## 🔑 Seller Credentials
+
+Use the following credentials to log in as seller:
+
+- **Email**: rakib@gmail.com
+- **Password**: rakib
+
 ## 🚀 Getting Started with Shoe Management Client
 
 Follow these steps to set up the project locally:
